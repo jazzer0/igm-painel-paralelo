@@ -12357,7 +12357,7 @@ export namespace Prisma {
 
   export type Ibge_localidadesGroupByOutputType = {
     id: number
-    cod_ibge: number | null
+    cod_ibge: number
     nome: string | null
     microrregiao: string | null
     mesorregiao: string | null
@@ -12422,7 +12422,7 @@ export namespace Prisma {
     objects: {}
     scalars: $Extensions.GetPayloadResult<{
       id: number
-      cod_ibge: number | null
+      cod_ibge: number
       nome: string | null
       microrregiao: string | null
       mesorregiao: string | null
@@ -13004,7 +13004,7 @@ export namespace Prisma {
     /**
      * The data needed to create a ibge_localidades.
      */
-    data?: XOR<ibge_localidadesCreateInput, ibge_localidadesUncheckedCreateInput>
+    data: XOR<ibge_localidadesCreateInput, ibge_localidadesUncheckedCreateInput>
   }
 
   /**
@@ -57814,29 +57814,49 @@ export namespace Prisma {
   export type Transparencia_caucAvgAggregateOutputType = {
     cod_ibge: number | null
     transparencia_cauc_bruto: Decimal | null
+    pendencias: number | null
   }
 
   export type Transparencia_caucSumAggregateOutputType = {
     cod_ibge: number | null
     transparencia_cauc_bruto: Decimal | null
+    pendencias: bigint | null
   }
 
   export type Transparencia_caucMinAggregateOutputType = {
     cod_ibge: number | null
     nome_ibge: string | null
+    nome_igm: string | null
+    uf: string | null
+    nome_mesclado: string | null
     transparencia_cauc_bruto: Decimal | null
+    pendencias: bigint | null
+    pendencias_legenda: string | null
+    pendencias_legenda_individual: string | null
   }
 
   export type Transparencia_caucMaxAggregateOutputType = {
     cod_ibge: number | null
     nome_ibge: string | null
+    nome_igm: string | null
+    uf: string | null
+    nome_mesclado: string | null
     transparencia_cauc_bruto: Decimal | null
+    pendencias: bigint | null
+    pendencias_legenda: string | null
+    pendencias_legenda_individual: string | null
   }
 
   export type Transparencia_caucCountAggregateOutputType = {
     cod_ibge: number
     nome_ibge: number
+    nome_igm: number
+    uf: number
+    nome_mesclado: number
     transparencia_cauc_bruto: number
+    pendencias: number
+    pendencias_legenda: number
+    pendencias_legenda_individual: number
     _all: number
   }
 
@@ -57844,29 +57864,49 @@ export namespace Prisma {
   export type Transparencia_caucAvgAggregateInputType = {
     cod_ibge?: true
     transparencia_cauc_bruto?: true
+    pendencias?: true
   }
 
   export type Transparencia_caucSumAggregateInputType = {
     cod_ibge?: true
     transparencia_cauc_bruto?: true
+    pendencias?: true
   }
 
   export type Transparencia_caucMinAggregateInputType = {
     cod_ibge?: true
     nome_ibge?: true
+    nome_igm?: true
+    uf?: true
+    nome_mesclado?: true
     transparencia_cauc_bruto?: true
+    pendencias?: true
+    pendencias_legenda?: true
+    pendencias_legenda_individual?: true
   }
 
   export type Transparencia_caucMaxAggregateInputType = {
     cod_ibge?: true
     nome_ibge?: true
+    nome_igm?: true
+    uf?: true
+    nome_mesclado?: true
     transparencia_cauc_bruto?: true
+    pendencias?: true
+    pendencias_legenda?: true
+    pendencias_legenda_individual?: true
   }
 
   export type Transparencia_caucCountAggregateInputType = {
     cod_ibge?: true
     nome_ibge?: true
+    nome_igm?: true
+    uf?: true
+    nome_mesclado?: true
     transparencia_cauc_bruto?: true
+    pendencias?: true
+    pendencias_legenda?: true
+    pendencias_legenda_individual?: true
     _all?: true
   }
 
@@ -57959,7 +57999,13 @@ export namespace Prisma {
   export type Transparencia_caucGroupByOutputType = {
     cod_ibge: number
     nome_ibge: string | null
+    nome_igm: string | null
+    uf: string | null
+    nome_mesclado: string | null
     transparencia_cauc_bruto: Decimal | null
+    pendencias: bigint
+    pendencias_legenda: string | null
+    pendencias_legenda_individual: string | null
     _count: Transparencia_caucCountAggregateOutputType | null
     _avg: Transparencia_caucAvgAggregateOutputType | null
     _sum: Transparencia_caucSumAggregateOutputType | null
@@ -57984,7 +58030,13 @@ export namespace Prisma {
   export type transparencia_caucSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     cod_ibge?: boolean
     nome_ibge?: boolean
+    nome_igm?: boolean
+    uf?: boolean
+    nome_mesclado?: boolean
     transparencia_cauc_bruto?: boolean
+    pendencias?: boolean
+    pendencias_legenda?: boolean
+    pendencias_legenda_individual?: boolean
   }, ExtArgs["result"]["transparencia_cauc"]>
 
 
@@ -57992,10 +58044,16 @@ export namespace Prisma {
   export type transparencia_caucSelectScalar = {
     cod_ibge?: boolean
     nome_ibge?: boolean
+    nome_igm?: boolean
+    uf?: boolean
+    nome_mesclado?: boolean
     transparencia_cauc_bruto?: boolean
+    pendencias?: boolean
+    pendencias_legenda?: boolean
+    pendencias_legenda_individual?: boolean
   }
 
-  export type transparencia_caucOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"cod_ibge" | "nome_ibge" | "transparencia_cauc_bruto", ExtArgs["result"]["transparencia_cauc"]>
+  export type transparencia_caucOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"cod_ibge" | "nome_ibge" | "nome_igm" | "uf" | "nome_mesclado" | "transparencia_cauc_bruto" | "pendencias" | "pendencias_legenda" | "pendencias_legenda_individual", ExtArgs["result"]["transparencia_cauc"]>
 
   export type $transparencia_caucPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "transparencia_cauc"
@@ -58003,7 +58061,13 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       cod_ibge: number
       nome_ibge: string | null
+      nome_igm: string | null
+      uf: string | null
+      nome_mesclado: string | null
       transparencia_cauc_bruto: Prisma.Decimal | null
+      pendencias: bigint
+      pendencias_legenda: string | null
+      pendencias_legenda_individual: string | null
     }, ExtArgs["result"]["transparencia_cauc"]>
     composites: {}
   }
@@ -58375,7 +58439,13 @@ export namespace Prisma {
   interface transparencia_caucFieldRefs {
     readonly cod_ibge: FieldRef<"transparencia_cauc", 'Int'>
     readonly nome_ibge: FieldRef<"transparencia_cauc", 'String'>
+    readonly nome_igm: FieldRef<"transparencia_cauc", 'String'>
+    readonly uf: FieldRef<"transparencia_cauc", 'String'>
+    readonly nome_mesclado: FieldRef<"transparencia_cauc", 'String'>
     readonly transparencia_cauc_bruto: FieldRef<"transparencia_cauc", 'Decimal'>
+    readonly pendencias: FieldRef<"transparencia_cauc", 'BigInt'>
+    readonly pendencias_legenda: FieldRef<"transparencia_cauc", 'String'>
+    readonly pendencias_legenda_individual: FieldRef<"transparencia_cauc", 'String'>
   }
     
 
@@ -61421,7 +61491,13 @@ export namespace Prisma {
   export const Transparencia_caucScalarFieldEnum: {
     cod_ibge: 'cod_ibge',
     nome_ibge: 'nome_ibge',
-    transparencia_cauc_bruto: 'transparencia_cauc_bruto'
+    nome_igm: 'nome_igm',
+    uf: 'uf',
+    nome_mesclado: 'nome_mesclado',
+    transparencia_cauc_bruto: 'transparencia_cauc_bruto',
+    pendencias: 'pendencias',
+    pendencias_legenda: 'pendencias_legenda',
+    pendencias_legenda_individual: 'pendencias_legenda_individual'
   };
 
   export type Transparencia_caucScalarFieldEnum = (typeof Transparencia_caucScalarFieldEnum)[keyof typeof Transparencia_caucScalarFieldEnum]
@@ -61956,7 +62032,12 @@ export namespace Prisma {
 
 
   export const transparencia_caucOrderByRelevanceFieldEnum: {
-    nome_ibge: 'nome_ibge'
+    nome_ibge: 'nome_ibge',
+    nome_igm: 'nome_igm',
+    uf: 'uf',
+    nome_mesclado: 'nome_mesclado',
+    pendencias_legenda: 'pendencias_legenda',
+    pendencias_legenda_individual: 'pendencias_legenda_individual'
   };
 
   export type transparencia_caucOrderByRelevanceFieldEnum = (typeof transparencia_caucOrderByRelevanceFieldEnum)[keyof typeof transparencia_caucOrderByRelevanceFieldEnum]
@@ -62043,6 +62124,13 @@ export namespace Prisma {
    * Reference to a field of type 'Boolean'
    */
   export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+    
+
+
+  /**
+   * Reference to a field of type 'BigInt'
+   */
+  export type BigIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BigInt'>
     
   /**
    * Deep Input Types
@@ -62586,7 +62674,7 @@ export namespace Prisma {
     OR?: ibge_localidadesWhereInput[]
     NOT?: ibge_localidadesWhereInput | ibge_localidadesWhereInput[]
     id?: IntFilter<"ibge_localidades"> | number
-    cod_ibge?: IntNullableFilter<"ibge_localidades"> | number | null
+    cod_ibge?: IntFilter<"ibge_localidades"> | number
     nome?: StringNullableFilter<"ibge_localidades"> | string | null
     microrregiao?: StringNullableFilter<"ibge_localidades"> | string | null
     mesorregiao?: StringNullableFilter<"ibge_localidades"> | string | null
@@ -62599,7 +62687,7 @@ export namespace Prisma {
 
   export type ibge_localidadesOrderByWithRelationInput = {
     id?: SortOrder
-    cod_ibge?: SortOrderInput | SortOrder
+    cod_ibge?: SortOrder
     nome?: SortOrderInput | SortOrder
     microrregiao?: SortOrderInput | SortOrder
     mesorregiao?: SortOrderInput | SortOrder
@@ -62616,7 +62704,7 @@ export namespace Prisma {
     AND?: ibge_localidadesWhereInput | ibge_localidadesWhereInput[]
     OR?: ibge_localidadesWhereInput[]
     NOT?: ibge_localidadesWhereInput | ibge_localidadesWhereInput[]
-    cod_ibge?: IntNullableFilter<"ibge_localidades"> | number | null
+    cod_ibge?: IntFilter<"ibge_localidades"> | number
     nome?: StringNullableFilter<"ibge_localidades"> | string | null
     microrregiao?: StringNullableFilter<"ibge_localidades"> | string | null
     mesorregiao?: StringNullableFilter<"ibge_localidades"> | string | null
@@ -62629,7 +62717,7 @@ export namespace Prisma {
 
   export type ibge_localidadesOrderByWithAggregationInput = {
     id?: SortOrder
-    cod_ibge?: SortOrderInput | SortOrder
+    cod_ibge?: SortOrder
     nome?: SortOrderInput | SortOrder
     microrregiao?: SortOrderInput | SortOrder
     mesorregiao?: SortOrderInput | SortOrder
@@ -62650,7 +62738,7 @@ export namespace Prisma {
     OR?: ibge_localidadesScalarWhereWithAggregatesInput[]
     NOT?: ibge_localidadesScalarWhereWithAggregatesInput | ibge_localidadesScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"ibge_localidades"> | number
-    cod_ibge?: IntNullableWithAggregatesFilter<"ibge_localidades"> | number | null
+    cod_ibge?: IntWithAggregatesFilter<"ibge_localidades"> | number
     nome?: StringNullableWithAggregatesFilter<"ibge_localidades"> | string | null
     microrregiao?: StringNullableWithAggregatesFilter<"ibge_localidades"> | string | null
     mesorregiao?: StringNullableWithAggregatesFilter<"ibge_localidades"> | string | null
@@ -66500,13 +66588,25 @@ export namespace Prisma {
     NOT?: transparencia_caucWhereInput | transparencia_caucWhereInput[]
     cod_ibge?: IntFilter<"transparencia_cauc"> | number
     nome_ibge?: StringNullableFilter<"transparencia_cauc"> | string | null
+    nome_igm?: StringNullableFilter<"transparencia_cauc"> | string | null
+    uf?: StringNullableFilter<"transparencia_cauc"> | string | null
+    nome_mesclado?: StringNullableFilter<"transparencia_cauc"> | string | null
     transparencia_cauc_bruto?: DecimalNullableFilter<"transparencia_cauc"> | Decimal | DecimalJsLike | number | string | null
+    pendencias?: BigIntFilter<"transparencia_cauc"> | bigint | number
+    pendencias_legenda?: StringNullableFilter<"transparencia_cauc"> | string | null
+    pendencias_legenda_individual?: StringNullableFilter<"transparencia_cauc"> | string | null
   }
 
   export type transparencia_caucOrderByWithRelationInput = {
     cod_ibge?: SortOrder
     nome_ibge?: SortOrderInput | SortOrder
+    nome_igm?: SortOrderInput | SortOrder
+    uf?: SortOrderInput | SortOrder
+    nome_mesclado?: SortOrderInput | SortOrder
     transparencia_cauc_bruto?: SortOrderInput | SortOrder
+    pendencias?: SortOrder
+    pendencias_legenda?: SortOrderInput | SortOrder
+    pendencias_legenda_individual?: SortOrderInput | SortOrder
     _relevance?: transparencia_caucOrderByRelevanceInput
   }
 
@@ -66516,13 +66616,25 @@ export namespace Prisma {
     OR?: transparencia_caucWhereInput[]
     NOT?: transparencia_caucWhereInput | transparencia_caucWhereInput[]
     nome_ibge?: StringNullableFilter<"transparencia_cauc"> | string | null
+    nome_igm?: StringNullableFilter<"transparencia_cauc"> | string | null
+    uf?: StringNullableFilter<"transparencia_cauc"> | string | null
+    nome_mesclado?: StringNullableFilter<"transparencia_cauc"> | string | null
     transparencia_cauc_bruto?: DecimalNullableFilter<"transparencia_cauc"> | Decimal | DecimalJsLike | number | string | null
+    pendencias?: BigIntFilter<"transparencia_cauc"> | bigint | number
+    pendencias_legenda?: StringNullableFilter<"transparencia_cauc"> | string | null
+    pendencias_legenda_individual?: StringNullableFilter<"transparencia_cauc"> | string | null
   }, "cod_ibge">
 
   export type transparencia_caucOrderByWithAggregationInput = {
     cod_ibge?: SortOrder
     nome_ibge?: SortOrderInput | SortOrder
+    nome_igm?: SortOrderInput | SortOrder
+    uf?: SortOrderInput | SortOrder
+    nome_mesclado?: SortOrderInput | SortOrder
     transparencia_cauc_bruto?: SortOrderInput | SortOrder
+    pendencias?: SortOrder
+    pendencias_legenda?: SortOrderInput | SortOrder
+    pendencias_legenda_individual?: SortOrderInput | SortOrder
     _count?: transparencia_caucCountOrderByAggregateInput
     _avg?: transparencia_caucAvgOrderByAggregateInput
     _max?: transparencia_caucMaxOrderByAggregateInput
@@ -66536,7 +66648,13 @@ export namespace Prisma {
     NOT?: transparencia_caucScalarWhereWithAggregatesInput | transparencia_caucScalarWhereWithAggregatesInput[]
     cod_ibge?: IntWithAggregatesFilter<"transparencia_cauc"> | number
     nome_ibge?: StringNullableWithAggregatesFilter<"transparencia_cauc"> | string | null
+    nome_igm?: StringNullableWithAggregatesFilter<"transparencia_cauc"> | string | null
+    uf?: StringNullableWithAggregatesFilter<"transparencia_cauc"> | string | null
+    nome_mesclado?: StringNullableWithAggregatesFilter<"transparencia_cauc"> | string | null
     transparencia_cauc_bruto?: DecimalNullableWithAggregatesFilter<"transparencia_cauc"> | Decimal | DecimalJsLike | number | string | null
+    pendencias?: BigIntWithAggregatesFilter<"transparencia_cauc"> | bigint | number
+    pendencias_legenda?: StringNullableWithAggregatesFilter<"transparencia_cauc"> | string | null
+    pendencias_legenda_individual?: StringNullableWithAggregatesFilter<"transparencia_cauc"> | string | null
   }
 
   export type transparencia_indiceWhereInput = {
@@ -67233,7 +67351,7 @@ export namespace Prisma {
   }
 
   export type ibge_localidadesCreateInput = {
-    cod_ibge?: number | null
+    cod_ibge: number
     nome?: string | null
     microrregiao?: string | null
     mesorregiao?: string | null
@@ -67246,7 +67364,7 @@ export namespace Prisma {
 
   export type ibge_localidadesUncheckedCreateInput = {
     id?: number
-    cod_ibge?: number | null
+    cod_ibge: number
     nome?: string | null
     microrregiao?: string | null
     mesorregiao?: string | null
@@ -67258,7 +67376,7 @@ export namespace Prisma {
   }
 
   export type ibge_localidadesUpdateInput = {
-    cod_ibge?: NullableIntFieldUpdateOperationsInput | number | null
+    cod_ibge?: IntFieldUpdateOperationsInput | number
     nome?: NullableStringFieldUpdateOperationsInput | string | null
     microrregiao?: NullableStringFieldUpdateOperationsInput | string | null
     mesorregiao?: NullableStringFieldUpdateOperationsInput | string | null
@@ -67271,7 +67389,7 @@ export namespace Prisma {
 
   export type ibge_localidadesUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
-    cod_ibge?: NullableIntFieldUpdateOperationsInput | number | null
+    cod_ibge?: IntFieldUpdateOperationsInput | number
     nome?: NullableStringFieldUpdateOperationsInput | string | null
     microrregiao?: NullableStringFieldUpdateOperationsInput | string | null
     mesorregiao?: NullableStringFieldUpdateOperationsInput | string | null
@@ -67284,7 +67402,7 @@ export namespace Prisma {
 
   export type ibge_localidadesCreateManyInput = {
     id?: number
-    cod_ibge?: number | null
+    cod_ibge: number
     nome?: string | null
     microrregiao?: string | null
     mesorregiao?: string | null
@@ -67296,7 +67414,7 @@ export namespace Prisma {
   }
 
   export type ibge_localidadesUpdateManyMutationInput = {
-    cod_ibge?: NullableIntFieldUpdateOperationsInput | number | null
+    cod_ibge?: IntFieldUpdateOperationsInput | number
     nome?: NullableStringFieldUpdateOperationsInput | string | null
     microrregiao?: NullableStringFieldUpdateOperationsInput | string | null
     mesorregiao?: NullableStringFieldUpdateOperationsInput | string | null
@@ -67309,7 +67427,7 @@ export namespace Prisma {
 
   export type ibge_localidadesUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
-    cod_ibge?: NullableIntFieldUpdateOperationsInput | number | null
+    cod_ibge?: IntFieldUpdateOperationsInput | number
     nome?: NullableStringFieldUpdateOperationsInput | string | null
     microrregiao?: NullableStringFieldUpdateOperationsInput | string | null
     mesorregiao?: NullableStringFieldUpdateOperationsInput | string | null
@@ -71734,43 +71852,85 @@ export namespace Prisma {
   export type transparencia_caucCreateInput = {
     cod_ibge: number
     nome_ibge?: string | null
+    nome_igm?: string | null
+    uf?: string | null
+    nome_mesclado?: string | null
     transparencia_cauc_bruto?: Decimal | DecimalJsLike | number | string | null
+    pendencias: bigint | number
+    pendencias_legenda?: string | null
+    pendencias_legenda_individual?: string | null
   }
 
   export type transparencia_caucUncheckedCreateInput = {
     cod_ibge: number
     nome_ibge?: string | null
+    nome_igm?: string | null
+    uf?: string | null
+    nome_mesclado?: string | null
     transparencia_cauc_bruto?: Decimal | DecimalJsLike | number | string | null
+    pendencias: bigint | number
+    pendencias_legenda?: string | null
+    pendencias_legenda_individual?: string | null
   }
 
   export type transparencia_caucUpdateInput = {
     cod_ibge?: IntFieldUpdateOperationsInput | number
     nome_ibge?: NullableStringFieldUpdateOperationsInput | string | null
+    nome_igm?: NullableStringFieldUpdateOperationsInput | string | null
+    uf?: NullableStringFieldUpdateOperationsInput | string | null
+    nome_mesclado?: NullableStringFieldUpdateOperationsInput | string | null
     transparencia_cauc_bruto?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    pendencias?: BigIntFieldUpdateOperationsInput | bigint | number
+    pendencias_legenda?: NullableStringFieldUpdateOperationsInput | string | null
+    pendencias_legenda_individual?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type transparencia_caucUncheckedUpdateInput = {
     cod_ibge?: IntFieldUpdateOperationsInput | number
     nome_ibge?: NullableStringFieldUpdateOperationsInput | string | null
+    nome_igm?: NullableStringFieldUpdateOperationsInput | string | null
+    uf?: NullableStringFieldUpdateOperationsInput | string | null
+    nome_mesclado?: NullableStringFieldUpdateOperationsInput | string | null
     transparencia_cauc_bruto?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    pendencias?: BigIntFieldUpdateOperationsInput | bigint | number
+    pendencias_legenda?: NullableStringFieldUpdateOperationsInput | string | null
+    pendencias_legenda_individual?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type transparencia_caucCreateManyInput = {
     cod_ibge: number
     nome_ibge?: string | null
+    nome_igm?: string | null
+    uf?: string | null
+    nome_mesclado?: string | null
     transparencia_cauc_bruto?: Decimal | DecimalJsLike | number | string | null
+    pendencias: bigint | number
+    pendencias_legenda?: string | null
+    pendencias_legenda_individual?: string | null
   }
 
   export type transparencia_caucUpdateManyMutationInput = {
     cod_ibge?: IntFieldUpdateOperationsInput | number
     nome_ibge?: NullableStringFieldUpdateOperationsInput | string | null
+    nome_igm?: NullableStringFieldUpdateOperationsInput | string | null
+    uf?: NullableStringFieldUpdateOperationsInput | string | null
+    nome_mesclado?: NullableStringFieldUpdateOperationsInput | string | null
     transparencia_cauc_bruto?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    pendencias?: BigIntFieldUpdateOperationsInput | bigint | number
+    pendencias_legenda?: NullableStringFieldUpdateOperationsInput | string | null
+    pendencias_legenda_individual?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type transparencia_caucUncheckedUpdateManyInput = {
     cod_ibge?: IntFieldUpdateOperationsInput | number
     nome_ibge?: NullableStringFieldUpdateOperationsInput | string | null
+    nome_igm?: NullableStringFieldUpdateOperationsInput | string | null
+    uf?: NullableStringFieldUpdateOperationsInput | string | null
+    nome_mesclado?: NullableStringFieldUpdateOperationsInput | string | null
     transparencia_cauc_bruto?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    pendencias?: BigIntFieldUpdateOperationsInput | bigint | number
+    pendencias_legenda?: NullableStringFieldUpdateOperationsInput | string | null
+    pendencias_legenda_individual?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type transparencia_indiceCreateInput = {
@@ -75708,6 +75868,17 @@ export namespace Prisma {
     seguranca_transito_bruto?: SortOrder
   }
 
+  export type BigIntFilter<$PrismaModel = never> = {
+    equals?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    in?: bigint[] | number[]
+    notIn?: bigint[] | number[]
+    lt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    lte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    not?: NestedBigIntFilter<$PrismaModel> | bigint | number
+  }
+
   export type transparencia_caucOrderByRelevanceInput = {
     fields: transparencia_caucOrderByRelevanceFieldEnum | transparencia_caucOrderByRelevanceFieldEnum[]
     sort: SortOrder
@@ -75717,29 +75888,65 @@ export namespace Prisma {
   export type transparencia_caucCountOrderByAggregateInput = {
     cod_ibge?: SortOrder
     nome_ibge?: SortOrder
+    nome_igm?: SortOrder
+    uf?: SortOrder
+    nome_mesclado?: SortOrder
     transparencia_cauc_bruto?: SortOrder
+    pendencias?: SortOrder
+    pendencias_legenda?: SortOrder
+    pendencias_legenda_individual?: SortOrder
   }
 
   export type transparencia_caucAvgOrderByAggregateInput = {
     cod_ibge?: SortOrder
     transparencia_cauc_bruto?: SortOrder
+    pendencias?: SortOrder
   }
 
   export type transparencia_caucMaxOrderByAggregateInput = {
     cod_ibge?: SortOrder
     nome_ibge?: SortOrder
+    nome_igm?: SortOrder
+    uf?: SortOrder
+    nome_mesclado?: SortOrder
     transparencia_cauc_bruto?: SortOrder
+    pendencias?: SortOrder
+    pendencias_legenda?: SortOrder
+    pendencias_legenda_individual?: SortOrder
   }
 
   export type transparencia_caucMinOrderByAggregateInput = {
     cod_ibge?: SortOrder
     nome_ibge?: SortOrder
+    nome_igm?: SortOrder
+    uf?: SortOrder
+    nome_mesclado?: SortOrder
     transparencia_cauc_bruto?: SortOrder
+    pendencias?: SortOrder
+    pendencias_legenda?: SortOrder
+    pendencias_legenda_individual?: SortOrder
   }
 
   export type transparencia_caucSumOrderByAggregateInput = {
     cod_ibge?: SortOrder
     transparencia_cauc_bruto?: SortOrder
+    pendencias?: SortOrder
+  }
+
+  export type BigIntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    in?: bigint[] | number[]
+    notIn?: bigint[] | number[]
+    lt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    lte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    not?: NestedBigIntWithAggregatesFilter<$PrismaModel> | bigint | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedBigIntFilter<$PrismaModel>
+    _min?: NestedBigIntFilter<$PrismaModel>
+    _max?: NestedBigIntFilter<$PrismaModel>
   }
 
   export type transparencia_indiceOrderByRelevanceInput = {
@@ -75942,6 +76149,14 @@ export namespace Prisma {
     decrement?: Decimal | DecimalJsLike | number | string
     multiply?: Decimal | DecimalJsLike | number | string
     divide?: Decimal | DecimalJsLike | number | string
+  }
+
+  export type BigIntFieldUpdateOperationsInput = {
+    set?: bigint | number
+    increment?: bigint | number
+    decrement?: bigint | number
+    multiply?: bigint | number
+    divide?: bigint | number
   }
 
   export type NestedIntFilter<$PrismaModel = never> = {
@@ -76268,6 +76483,33 @@ export namespace Prisma {
     _sum?: NestedDecimalFilter<$PrismaModel>
     _min?: NestedDecimalFilter<$PrismaModel>
     _max?: NestedDecimalFilter<$PrismaModel>
+  }
+
+  export type NestedBigIntFilter<$PrismaModel = never> = {
+    equals?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    in?: bigint[] | number[]
+    notIn?: bigint[] | number[]
+    lt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    lte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    not?: NestedBigIntFilter<$PrismaModel> | bigint | number
+  }
+
+  export type NestedBigIntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    in?: bigint[] | number[]
+    notIn?: bigint[] | number[]
+    lt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    lte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    gte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
+    not?: NestedBigIntWithAggregatesFilter<$PrismaModel> | bigint | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedBigIntFilter<$PrismaModel>
+    _min?: NestedBigIntFilter<$PrismaModel>
+    _max?: NestedBigIntFilter<$PrismaModel>
   }
 
   export type unaCreateWithoutOutliersInput = {

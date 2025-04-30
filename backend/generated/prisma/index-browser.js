@@ -856,7 +856,13 @@ exports.Prisma.Seguranca_transitoScalarFieldEnum = {
 exports.Prisma.Transparencia_caucScalarFieldEnum = {
   cod_ibge: 'cod_ibge',
   nome_ibge: 'nome_ibge',
-  transparencia_cauc_bruto: 'transparencia_cauc_bruto'
+  nome_igm: 'nome_igm',
+  uf: 'uf',
+  nome_mesclado: 'nome_mesclado',
+  transparencia_cauc_bruto: 'transparencia_cauc_bruto',
+  pendencias: 'pendencias',
+  pendencias_legenda: 'pendencias_legenda',
+  pendencias_legenda_individual: 'pendencias_legenda_individual'
 };
 
 exports.Prisma.Transparencia_indiceScalarFieldEnum = {
@@ -1235,7 +1241,12 @@ exports.Prisma.seguranca_transitoOrderByRelevanceFieldEnum = {
 };
 
 exports.Prisma.transparencia_caucOrderByRelevanceFieldEnum = {
-  nome_ibge: 'nome_ibge'
+  nome_ibge: 'nome_ibge',
+  nome_igm: 'nome_igm',
+  uf: 'uf',
+  nome_mesclado: 'nome_mesclado',
+  pendencias_legenda: 'pendencias_legenda',
+  pendencias_legenda_individual: 'pendencias_legenda_individual'
 };
 
 exports.Prisma.transparencia_indiceOrderByRelevanceFieldEnum = {
