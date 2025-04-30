@@ -1,15 +1,858 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
+  previewFeatures = ["views"]
   output   = "../generated/prisma"
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "mysql"
   url      = env("DATABASE_URL")
+}
+
+model cauc {
+  cod_ibge  Int     @id
+  uf        String? @db.VarChar(2)
+  nome_cauc String? @db.VarChar(255)
+  regiao    String? @db.VarChar(50)
+  populacao Int?
+  campo_1_1 String? @map("1_1") @db.VarChar(255)
+  campo_1_2 String? @map("1_2") @db.VarChar(255)
+  campo_1_3 String? @map("1_3") @db.VarChar(255)
+  campo_1_4 String? @map("1_4") @db.VarChar(255)
+  campo_1_5 String? @map("1_5") @db.VarChar(255)
+  campo_2_1_1 String? @map("2_1_1") @db.VarChar(255)
+  campo_2_1_2 String? @map("2_1_2") @db.VarChar(255)
+  campo_3_1_1 String? @map("3_1_1") @db.VarChar(255)
+  campo_3_1_2 String? @map("3_1_2") @db.VarChar(255)
+  campo_3_2_1 String? @map("3_2_1") @db.VarChar(255)
+  campo_3_2_2 String? @map("3_2_2") @db.VarChar(255)
+  campo_3_2_3 String? @map("3_2_3") @db.VarChar(255)
+  campo_3_3 String? @map("3_3") @db.VarChar(255)
+  campo_3_4_1 String? @map("3_4_1") @db.VarChar(255)
+  campo_3_4_2 String? @map("3_4_2") @db.VarChar(255)
+  campo_3_5 String? @map("3_5") @db.VarChar(255)
+  campo_3_6 String? @map("3_6") @db.VarChar(255)
+  campo_3_7 String? @map("3_7") @db.VarChar(255)
+  campo_4_1 String? @map("4_1") @db.VarChar(255)
+  campo_4_2 String? @map("4_2") @db.VarChar(255)
+  campo_5_1 String? @map("5_1") @db.VarChar(255)
+  campo_5_2 String? @map("5_2") @db.VarChar(255)
+  campo_5_3 String? @map("5_3") @db.VarChar(255)
+  campo_5_4 String? @map("5_4") @db.VarChar(255)
+  campo_5_5 String? @map("5_5") @db.VarChar(255)
+  campo_5_6 String? @map("5_6") @db.VarChar(255)
+  campo_5_7 String? @map("5_7") @db.VarChar(255)
+}
+model cidade_brasil {
+  cod_ibge     Int    @id @map("cod_ibge")
+  nome         String? @db.VarChar(50)
+  estado_sigla String? @db.VarChar(50)
+}
+
+model data_sources {
+  file_base    String   @id @db.VarChar(255)
+  file_name    String?  @db.VarChar(255)
+  link         String?  @db.VarChar(255)
+  file_type    String?  @db.VarChar(10)
+  updated_at   DateTime @db.DateTime(0)
+  last_checked DateTime @db.DateTime(0)
+}
+model despesas {
+  id       Int     @id @default(autoincrement())
+  despesas String? @db.VarChar(255)
+  conta    String? @db.VarChar(255)
+}
+model finbra {
+  id            Int    @id @default(autoincrement())
+  cod_ibge      Int
+  uf            String @db.VarChar(2)
+  populacao     Int?
+  coluna        String @db.VarChar(255)
+  despesa       String @db.VarChar(255)
+  conta         String @db.VarChar(255)
+  identificador String @db.VarChar(255)
+  valor         String @db.VarChar(255)
+  fonte         String @db.VarChar(255)
+
+  @@index([cod_ibge], map: "ix_finbra_cod_ibge")
+}
+model gabarito {
+  id       Int     @id @default(autoincrement())
+  despesas String? @db.VarChar(255)
+  conta    String? @db.VarChar(255)
+}
+
+model grupos_municipios {
+  cod_ibge            Int      @id
+  populacao           Decimal? @db.Decimal(15, 2)
+  pib                 Decimal? @db.Decimal(15, 2)
+  pib_per_capita      Decimal? @db.Decimal(15, 2)
+  categoria_populacao CategoriaPopulacao?
+  categoria_pib       CategoriaPIB?
+  grupo               Int      @db.TinyInt
+  capital             Capital  @default(N)
+
+  @@index([grupo], map: "idx_grupo")
+  @@index([grupo], map: "idx_una_grupo")
+  @@map("grupos_municipios")
+}
+
+
+enum CategoriaPopulacao {
+  Ate20Mil         // "Até 20.000"
+  VinteACinquentaMil // "20.000-50.000"
+  CinquentaACemMil // "50.000-100.000"
+  AcimaDeCemMil    // "Acima de 100.000"
+}
+
+enum CategoriaPIB {
+  AbaixoDaMediana  // "Abaixo da Mediana"
+  AcimaDaMediana   // "Acima da Mediana"
+}
+
+enum Capital {
+  S
+  N
+}
+
+model ibge_localidades {
+  id                 Int     @id @default(autoincrement())
+  cod_ibge           Int?
+  nome               String? @db.VarChar(255)
+  microrregiao       String? @db.VarChar(255)
+  mesorregiao        String? @db.VarChar(255)
+  UF_sigla           String? @db.VarChar(10)
+  UF_nome            String? @db.VarChar(255)
+  regiao             String? @db.VarChar(255)
+  regiao_imediata_id Int?
+  regiao_imediata    String? @db.VarChar(255)
+}
+
+model ibge_pib {
+  id       Int     @id @default(autoincrement())
+  cod_ibge String  @unique(map: "cod_ibge") @db.VarChar(10)
+  nivel    String? @db.VarChar(50)
+  nome     String? @db.VarChar(255)
+  pib      Int?
+  ano      String? @db.VarChar(4)
+}
+
+model ibge_populacao {
+  id        Int     @id @default(autoincrement())
+  cod_ibge  String  @unique(map: "cod_ibge") @db.VarChar(10)
+  nivel     String? @db.VarChar(50)
+  nome      String? @db.VarChar(255)
+  populacao Int?
+}
+model indicator_validation_log {
+  id                 Int       @id @default(autoincrement())
+  cod_ibge           Int       @unique(map: "cod_ibge")
+  municipio_ibge     String?   @db.VarChar(255)
+  municipio_igm      String?   @db.VarChar(255)
+  municipio_cid_br   String?   @db.VarChar(255)
+  link_cidade_brasil String?   @db.VarChar(255)
+  site_oficial       String?   @db.VarChar(255)
+  telefone           String?   @db.VarChar(50)
+  email              String?   @db.VarChar(255)
+  administracao      String?   @db.VarChar(255)
+  partido_adm        String?   @db.VarChar(50)
+  cod_postal         String?   @db.VarChar(20)
+  scrape_log         String?   @db.Text
+  scrape_status      String?   @db.VarChar(20)
+  last_updated       DateTime? @default(now()) @db.Timestamp(0)
+}
+model legenda_cauc {
+  id          Int    @id @default(autoincrement())
+  codigo_item String @db.VarChar(10)
+  exigencia   String @db.VarChar(255)
+
+  @@index([codigo_item], map: "idx_codigo_item")
+}
+
+model lei_geral {
+  id                        Int     @id @default(autoincrement())
+  cod_ibge                  String? @db.VarChar(15)
+  sigla                     String? @db.VarChar(255)
+  municipio                 String? @db.VarChar(255)
+  uso_do_poder_de_compra    Float?  @db.Float
+  desburocratiza_o          Float?  @db.Float
+  empreendedor_individual   Float?  @db.Float
+  agente_de_desenvolvimento Float?  @db.Float
+  atores_desenvolvimento    Float?  @db.Float
+  compras_publicas          Float?  @db.Float
+  rede_simples              Float?  @db.Float
+  sala_do_empreendedor      Float?  @db.Float
+  rede_simples_2            Float?  @db.Float
+
+  @@index([cod_ibge], map: "ix_lei_geral_cod_ibge")
+}
+
+model metas {
+  grupo        Int       @db.TinyInt
+  indicador    String    @db.VarChar(255)
+  valor_meta   Decimal?  @db.Decimal(18, 6)
+  data_calculo DateTime? @default(now()) @db.DateTime(0)
+
+  @@id([grupo, indicador])
+}
+
+model nomes_dataprev {
+  cod_ibge      Int    @id @map("cod_ibge")
+  nome_dataprev String? @db.VarChar(50)
+  UF            String? @db.VarChar(50)
+}
+
+model nomes_municipios {
+  id                      Int     @id @default(autoincrement())
+  cod_ibge                Int
+  municipio               String? @db.VarChar(255)
+  nome_igm                String? @db.VarChar(255)
+  estado                  String? @db.VarChar(255)
+  regiao                  String? @db.VarChar(255)
+  capital                 String? @db.VarChar(255)
+  cluster                 String? @db.VarChar(255)
+  populacao               Int?
+  area_territorial        Float?  @db.Float
+  pib_per_capita          Float?  @db.Float
+  igm_2024                Float?  @db.Float
+  link_cidade_brasil      String? @db.VarChar(255)
+  municipio_cidade_brasil String? @db.VarChar(255)
+  site_oficial            String? @db.VarChar(255)
+  resultado_cidade_brasil String? @db.VarChar(255)
+  planejamento_site       String? @db.VarChar(255)
+  planejamento_campo      String? @db.VarChar(255)
+  planejamento_resultado  String? @db.VarChar(255)
+  evidencia               String? @db.VarChar(255)
+}
+model nomes_municipios_igm {
+  cod_ibge     Int    @id @map("cod_ibge")
+  nome         String? @db.VarChar(50)
+  estado_sigla String? @db.VarChar(50)
+}
+
+model nomes_municipios_sebrae {
+  cod_ibge    String @id @db.VarChar(10) @map("cod_ibge")
+  nome_ibge   String? @db.VarChar(255)
+  nome_sebrae String? @db.VarChar(255)
+  estado      String? @db.VarChar(2)
+}
+
+
+model nomes_municipios_tabnet {
+  cod_ibge         Int @unique
+  cod              Int?
+  uf_sigla         String? @db.VarChar(10)
+  nome_ibge        String? @db.VarChar(50)
+  municipio_tabnet String? @db.VarChar(50)
+  nome_tabnet      String? @db.VarChar(60)
+}
+
+model outliers {
+  cod_ibge     Int
+  grupo        Int       @db.TinyInt
+  indicador    String    @db.VarChar(255)
+  is_outlier   Boolean   @default(false)
+  data_calculo DateTime? @default(now()) @db.DateTime(0)
+  una          una       @relation(fields: [cod_ibge], references: [cod_ibge], onDelete: NoAction, onUpdate: NoAction, map: "outliers_ibfk_1")
+
+  @@id([cod_ibge, indicador])
+}
+
+model pib_municipios {
+  id             Int      @id @default(autoincrement())
+  ano            String?  @db.VarChar(4)
+  cod_ibge       String   @unique(map: "cod_ibge") @db.VarChar(10)
+  pib            Decimal? @db.Decimal(15, 2)
+  pib_per_capita Decimal? @db.Decimal(15, 2)
+}
+model proc_logs {
+  id             Int       @id @default(autoincrement())
+  procedure_name String?   @db.VarChar(255)
+  message        String?   @db.Text
+  created_at     DateTime? @default(now()) @db.Timestamp(0)
+}
+
+model processing_logs {
+  id        Int       @id @default(autoincrement())
+  indicador String?   @db.VarChar(255)
+  etapa     String?   @db.VarChar(50)
+  registros Int?
+  inicio    DateTime? @db.DateTime(0)
+  fim       DateTime? @db.DateTime(0)
+}
+
+model scraper_planejamento {
+  id                     Int       @id @default(autoincrement())
+  cod_ibge               Int
+  municipio_nome         String?   @db.VarChar(255)
+  link                   String?   @db.VarChar(255)
+  planejamento_site      String?   @db.VarChar(255)
+  planejamento_campo     String?   @db.VarChar(255)
+  planejamento_resultado String?   @db.Text
+  evidencia              String?   @db.Text
+  evidencia_link         String?   @db.Text
+  scrape_log             String?   @db.Text
+  scrape_status          String?   @db.VarChar(20)
+  last_updated           DateTime? @default(now()) @db.Timestamp(0)
+}
+
+model una {
+  cod_ibge                            Int        @id
+  data_atualizacao                    DateTime?  @db.Date
+  fiscal_autonomia_bruto              Decimal?   @db.Decimal(18, 6)
+  fiscal_autonomia_nota               Decimal?   @db.Decimal(18, 6)
+  fiscal_investimento_bruto           Decimal?   @db.Decimal(18, 6)
+  fiscal_investimento_nota            Decimal?   @db.Decimal(18, 6)
+  fiscal_liquidez_bruto               Decimal?   @db.Decimal(18, 6)
+  fiscal_liquidez_nota                Decimal?   @db.Decimal(18, 6)
+  fiscal_gasto_pessoal_bruto          Decimal?   @db.Decimal(18, 6)
+  fiscal_gasto_pessoal_nota           Decimal?   @db.Decimal(18, 6)
+  investimento_saude_bruto            Decimal?   @db.Decimal(18, 6)
+  investimento_saude_nota             Decimal?   @db.Decimal(18, 6)
+  investimento_educacao_bruto         Decimal?   @db.Decimal(18, 6)
+  investimento_educacao_nota          Decimal?   @db.Decimal(18, 6)
+  custo_legislativo_bruto             Decimal?   @db.Decimal(18, 6)
+  custo_legislativo_nota              Decimal?   @db.Decimal(18, 6)
+  equilibrio_previdenciario_bruto     Decimal?   @db.Decimal(18, 6)
+  equilibrio_previdenciario_nota      Decimal?   @db.Decimal(18, 6)
+  planejamento_despesa_bruto          Decimal?   @db.Decimal(18, 6)
+  planejamento_despesa_nota           Decimal?   @db.Decimal(18, 6)
+  planejamento_captacao_bruto         Decimal?   @db.Decimal(18, 6)
+  planejamento_captacao_nota          Decimal?   @db.Decimal(18, 6)
+  planejamento_lei_geral_bruto        Decimal?   @db.Decimal(18, 6)
+  planejamento_lei_geral_nota         Decimal?   @db.Decimal(18, 6)
+  colaboradores_servidores_bruto      Decimal?   @db.Decimal(18, 6)
+  colaboradores_servidores_nota       Decimal?   @db.Decimal(18, 6)
+  colaboradores_comissionados_bruto   Decimal?   @db.Decimal(18, 6)
+  colaboradores_comissionados_nota    Decimal?   @db.Decimal(18, 6)
+  transparencia_disponibilidade_bruto Decimal?   @db.Decimal(18, 6)
+  transparencia_disponibilidade_nota  Decimal?   @db.Decimal(18, 6)
+  transparencia_cauc_bruto            Decimal?   @db.Decimal(18, 6)
+  transparencia_cauc_nota             Decimal?   @db.Decimal(18, 6)
+  transparencia_indice_bruto          Decimal?   @db.Decimal(18, 6)
+  transparencia_indice_nota           Decimal?   @db.Decimal(18, 6)
+  saude_mortalidade_bruto             Decimal?   @db.Decimal(18, 6)
+  saude_mortalidade_nota              Decimal?   @db.Decimal(18, 6)
+  saude_cobertura_bruto               Decimal?   @db.Decimal(18, 6)
+  saude_cobertura_nota                Decimal?   @db.Decimal(18, 6)
+  saude_vacina_bruto                  Decimal?   @db.Decimal(18, 6)
+  saude_vacina_nota                   Decimal?   @db.Decimal(18, 6)
+  educacao_abandono_bruto             Decimal?   @db.Decimal(18, 6)
+  educacao_abandono_nota              Decimal?   @db.Decimal(18, 6)
+  educacao_ideb_anos_iniciais_bruto   Decimal?   @db.Decimal(18, 6)
+  educacao_ideb_anos_iniciais_nota    Decimal?   @db.Decimal(18, 6)
+  educacao_ideb_anos_finais_bruto     Decimal?   @db.Decimal(18, 6)
+  educacao_ideb_anos_finais_nota      Decimal?   @db.Decimal(18, 6)
+  educacao_taxa_distorcao_bruto       Decimal?   @db.Decimal(18, 6)
+  educacao_taxa_distorcao_nota        Decimal?   @db.Decimal(18, 6)
+  educacao_creches_bruto              Decimal?   @db.Decimal(18, 6)
+  educacao_creches_nota               Decimal?   @db.Decimal(18, 6)
+  seguranca_homicidio_bruto           Decimal?   @db.Decimal(18, 6)
+  seguranca_homicidio_nota            Decimal?   @db.Decimal(18, 6)
+  seguranca_transito_bruto            Decimal?   @db.Decimal(18, 6)
+  seguranca_transito_nota             Decimal?   @db.Decimal(18, 6)
+  saneamento_acesso_agua_bruto        Decimal?   @db.Decimal(18, 6)
+  saneamento_acesso_agua_nota         Decimal?   @db.Decimal(18, 6)
+  saneamento_coleta_esgoto_bruto      Decimal?   @db.Decimal(18, 6)
+  saneamento_coleta_esgoto_nota       Decimal?   @db.Decimal(18, 6)
+  saneamento_tratamento_esgoto_bruto  Decimal?   @db.Decimal(18, 6)
+  saneamento_tratamento_esgoto_nota   Decimal?   @db.Decimal(18, 6)
+  vulnerabilidade_social_bruto        Decimal?   @db.Decimal(18, 6)
+  vulnerabilidade_social_nota         Decimal?   @db.Decimal(18, 6)
+  indicador_fiscal                    Decimal?   @db.Decimal(18, 6)
+  indicador_investimento_per_capita   Decimal?   @db.Decimal(18, 6)
+  indicador_custo_legislativo         Decimal?   @db.Decimal(18, 6)
+  indicador_equilibrio_previdenciario Decimal?   @db.Decimal(18, 6)
+  indicador_planejamento              Decimal?   @db.Decimal(18, 6)
+  indicador_colaboradores             Decimal?   @db.Decimal(18, 6)
+  indicador_transparencia             Decimal?   @db.Decimal(18, 6)
+  indicador_saude                     Decimal?   @db.Decimal(18, 6)
+  indicador_educacao                  Decimal?   @db.Decimal(18, 6)
+  indicador_seguranca                 Decimal?   @db.Decimal(18, 6)
+  indicador_saneamento_meio_ambiente  Decimal?   @db.Decimal(18, 6)
+  indicador_vulnerabilidade_social    Decimal?   @db.Decimal(18, 6)
+  dimensao_financas                   Decimal?   @db.Decimal(18, 6)
+  dimensao_gestao                     Decimal?   @db.Decimal(18, 6)
+  dimensao_desempenho                 Decimal?   @db.Decimal(18, 6)
+  nota_final                          Decimal?   @db.Decimal(18, 6)
+  outliers                            outliers[]
+}
+
+
+model una_colada {
+  ano                                   Int
+  codigo_municipio                      Int
+  cod_ibge                              Int
+  nome                                  String   @db.VarChar(255)
+  municipio_uf_conc                     String?  @db.VarChar(255)
+  nome_igm                              String?  @db.VarChar(255)
+  nome_igm_uf_conc                      String?  @db.VarChar(255)
+  estado_sigla                          String   @db.Char(2)
+  regiao                                String   @db.VarChar(255)
+  nome_uf                               String   @db.VarChar(255)
+  microregiao                           String?  @db.VarChar(255)
+  mesorregiao                           String?  @db.VarChar(255)
+  regiao_imediata                       String?  @db.VarChar(255)
+  capital                               String   @db.Char(1)
+  cluster                               Int?
+  populacao                             Int?
+  populacao_fonte                       String?  @db.VarChar(255)
+  area_territorial                      Decimal? @db.Decimal(18, 6)
+  area_territorial_fonte                String?  @db.VarChar(255)
+  pib_per_capita                        Decimal? @db.Decimal(18, 6)
+  pib_per_capita_fonte                  String?  @db.VarChar(255)
+  pib_precos_correntes                  Decimal? @db.Decimal(18, 6)
+  pib_precos_correntes_fonte            String?  @db.VarChar(255)
+  fiscal_autonomia_bruto                Decimal? @db.Decimal(18, 6)
+  fiscal_autonomia_nota                 Decimal? @db.Decimal(18, 6)
+  fiscal_autonomia_outlier              Decimal? @db.Decimal(18, 6)
+  fiscal_autonomia_meta                 Decimal? @db.Decimal(18, 6)
+  fiscal_autonomia_fonte                String?  @db.VarChar(255)
+  fiscal_investimento_bruto             Decimal? @db.Decimal(18, 6)
+  fiscal_investimento_nota              Decimal? @db.Decimal(18, 6)
+  fiscal_investimento_outlier           Decimal? @db.Decimal(18, 6)
+  fiscal_investimento_meta              Decimal? @db.Decimal(18, 6)
+  fiscal_investimento_fonte             String?  @db.VarChar(255)
+  fiscal_liquidez_bruto                 Decimal? @db.Decimal(18, 6)
+  fiscal_liquidez_nota                  Decimal? @db.Decimal(18, 6)
+  fiscal_liquidez_outlier               Decimal? @db.Decimal(18, 6)
+  fiscal_liquidez_meta                  Decimal? @db.Decimal(18, 6)
+  fiscal_liquidez_fonte                 String?  @db.VarChar(255)
+  fiscal_gasto_pessoal_bruto            Decimal? @db.Decimal(18, 6)
+  fiscal_gasto_pessoal_nota             Decimal? @db.Decimal(18, 6)
+  fiscal_gasto_pessoal_outlier          Decimal? @db.Decimal(18, 6)
+  fiscal_gasto_pessoal_meta             Decimal? @db.Decimal(18, 6)
+  fiscal_gasto_pessoal_fonte            String?  @db.VarChar(255)
+  investimento_saude_bruto              Decimal? @db.Decimal(18, 6)
+  investimento_saude_nota               Decimal? @db.Decimal(18, 6)
+  investimento_saude_outlier            Decimal? @db.Decimal(18, 6)
+  investimento_saude_meta               Decimal? @db.Decimal(18, 6)
+  investimento_saude_fonte              String?  @db.VarChar(255)
+  investimento_educacao_bruto           Decimal? @db.Decimal(18, 6)
+  investimento_educacao_nota            Decimal? @db.Decimal(18, 6)
+  investimento_educacao_outlier         Decimal? @db.Decimal(18, 6)
+  investimento_educacao_meta            Decimal? @db.Decimal(18, 6)
+  investimento_educacao_fonte           String?  @db.VarChar(255)
+  custo_legislativo_bruto               Decimal? @db.Decimal(18, 6)
+  custo_legislativo_nota                Decimal? @db.Decimal(18, 6)
+  custo_legislativo_outlier             Decimal? @db.Decimal(18, 6)
+  custo_legislativo_meta                Decimal? @db.Decimal(18, 6)
+  custo_legislativo_fonte               String?  @db.VarChar(255)
+  equilibrio_previdenciario_bruto       Decimal? @db.Decimal(18, 6)
+  equilibrio_previdenciario_nota        Decimal? @db.Decimal(18, 6)
+  equilibrio_previdenciario_outlier     Decimal? @db.Decimal(18, 6)
+  equilibrio_previdenciario_meta        Decimal? @db.Decimal(18, 6)
+  equilibrio_previdenciario_fonte       String?  @db.VarChar(255)
+  planejamento_despesa_bruto            Decimal? @db.Decimal(18, 6)
+  planejamento_despesa_nota             Decimal? @db.Decimal(18, 6)
+  planejamento_despesa_outlier          Decimal? @db.Decimal(18, 6)
+  planejamento_despesa_meta             Decimal? @db.Decimal(18, 6)
+  planejamento_despesa_fonte            String?  @db.VarChar(255)
+  planejamento_captacao_bruto           Decimal? @db.Decimal(18, 6)
+  planejamento_captacao_nota            Decimal? @db.Decimal(18, 6)
+  planejamento_captacao_outlier         Decimal? @db.Decimal(18, 6)
+  planejamento_captacao_meta            Decimal? @db.Decimal(18, 6)
+  planejamento_captacao_fonte           String?  @db.VarChar(255)
+  planejamento_lei_geral_bruto          Decimal? @db.Decimal(18, 6)
+  planejamento_lei_geral_nota           Decimal? @db.Decimal(18, 6)
+  planejamento_lei_geral_outlier        Decimal? @db.Decimal(18, 6)
+  planejamento_lei_geral_meta           Decimal? @db.Decimal(18, 6)
+  planejamento_lei_geral_fonte          String?  @db.VarChar(255)
+  colaboradores_servidores_bruto        Decimal? @db.Decimal(18, 6)
+  colaboradores_servidores_nota         Decimal? @db.Decimal(18, 6)
+  colaboradores_servidores_outlier      Decimal? @db.Decimal(18, 6)
+  colaboradores_servidores_meta         Decimal? @db.Decimal(18, 6)
+  colaboradores_servidores_fonte        String?  @db.VarChar(255)
+  colaboradores_comissionados_bruto     Decimal? @db.Decimal(18, 6)
+  colaboradores_comissionados_nota      Decimal? @db.Decimal(18, 6)
+  colaboradores_comissionados_outlier   Decimal? @db.Decimal(18, 6)
+  colaboradores_comissionados_meta      Decimal? @db.Decimal(18, 6)
+  colaboradores_comissionados_fonte     String?  @db.VarChar(255)
+  transparencia_disponibilidade_bruto   Decimal? @db.Decimal(18, 6)
+  transparencia_disponibilidade_nota    Decimal? @db.Decimal(18, 6)
+  transparencia_disponibilidade_outlier Decimal? @db.Decimal(18, 6)
+  transparencia_disponibilidade_meta    Decimal? @db.Decimal(18, 6)
+  transparencia_disponibilidade_fonte   String?  @db.VarChar(255)
+  transparencia_cauc_bruto              Decimal? @db.Decimal(18, 6)
+  transparencia_cauc_nota               Decimal? @db.Decimal(18, 6)
+  transparencia_cauc_outlier            Decimal? @db.Decimal(18, 6)
+  transparencia_cauc_meta               Decimal? @db.Decimal(18, 6)
+  transparencia_cauc_fonte              String?  @db.VarChar(255)
+  transparencia_indice_bruto            Decimal? @db.Decimal(18, 6)
+  transparencia_indice_nota             Decimal? @db.Decimal(18, 6)
+  transparencia_indice_outlier          Decimal? @db.Decimal(18, 6)
+  transparencia_indice_meta             Decimal? @db.Decimal(18, 6)
+  transparencia_indice_fonte            String?  @db.VarChar(255)
+  saude_mortalidade_bruto               Decimal? @db.Decimal(18, 6)
+  saude_mortalidade_nota                Decimal? @db.Decimal(18, 6)
+  saude_mortalidade_outlier             Decimal? @db.Decimal(18, 6)
+  saude_mortalidade_meta                Decimal? @db.Decimal(18, 6)
+  saude_mortalidade_fonte               String?  @db.VarChar(255)
+  saude_cobertura_bruto                 Decimal? @db.Decimal(18, 6)
+  saude_cobertura_nota                  Decimal? @db.Decimal(18, 6)
+  saude_cobertura_outlier               Decimal? @db.Decimal(18, 6)
+  saude_cobertura_meta                  Decimal? @db.Decimal(18, 6)
+  saude_cobertura_fonte                 String?  @db.VarChar(255)
+  saude_vacina_bruto                    Decimal? @db.Decimal(18, 6)
+  saude_vacina_nota                     Decimal? @db.Decimal(18, 6)
+  saude_vacina_outlier                  Decimal? @db.Decimal(18, 6)
+  saude_vacina_meta                     Decimal? @db.Decimal(18, 6)
+  saude_vacina_fonte                    String?  @db.VarChar(255)
+  educacao_abandono_bruto               Decimal? @db.Decimal(18, 6)
+  educacao_abandono_nota                Decimal? @db.Decimal(18, 6)
+  educacao_abandono_outlier             Decimal? @db.Decimal(18, 6)
+  educacao_abandono_meta                Decimal? @db.Decimal(18, 6)
+  educacao_abandono_fonte               String?  @db.VarChar(255)
+  educacao_ideb_anos_iniciais_bruto     Decimal? @db.Decimal(18, 6)
+  educacao_ideb_anos_iniciais_nota      Decimal? @db.Decimal(18, 6)
+  educacao_ideb_anos_iniciais_outlier   Decimal? @db.Decimal(18, 6)
+  educacao_ideb_anos_iniciais_meta      Decimal? @db.Decimal(18, 6)
+  educacao_ideb_anos_iniciais_fonte     String?  @db.VarChar(255)
+  educacao_ideb_anos_finais_bruto       Decimal? @db.Decimal(18, 6)
+  educacao_ideb_anos_finais_nota        Decimal? @db.Decimal(18, 6)
+  educacao_ideb_anos_finais_outlier     Decimal? @db.Decimal(18, 6)
+  educacao_ideb_anos_finais_meta        Decimal? @db.Decimal(18, 6)
+  educacao_ideb_anos_finais_fonte       String?  @db.VarChar(255)
+  educacao_taxa_distorcao_bruto         Decimal? @db.Decimal(18, 6)
+  educacao_taxa_distorcao_nota          Decimal? @db.Decimal(18, 6)
+  educacao_taxa_distorcao_outlier       Decimal? @db.Decimal(18, 6)
+  educacao_taxa_distorcao_meta          Decimal? @db.Decimal(18, 6)
+  educacao_taxa_distorcao_fonte         String?  @db.VarChar(255)
+  educacao_creches_bruto                Decimal? @db.Decimal(18, 6)
+  educacao_creches_nota                 Decimal? @db.Decimal(18, 6)
+  educacao_creches_outlier              Decimal? @db.Decimal(18, 6)
+  educacao_creches_meta                 Decimal? @db.Decimal(18, 6)
+  educacao_creches_fonte                String?  @db.VarChar(255)
+  seguranca_homicidio_bruto             Decimal? @db.Decimal(18, 6)
+  seguranca_homicidio_nota              Decimal? @db.Decimal(18, 6)
+  seguranca_homicidio_outlier           Decimal? @db.Decimal(18, 6)
+  seguranca_homicidio_meta              Decimal? @db.Decimal(18, 6)
+  seguranca_homicidio_fonte             String?  @db.VarChar(255)
+  seguranca_transito_bruto              Decimal? @db.Decimal(18, 6)
+  seguranca_transito_nota               Decimal? @db.Decimal(18, 6)
+  seguranca_transito_outlier            Decimal? @db.Decimal(18, 6)
+  seguranca_transito_meta               Decimal? @db.Decimal(18, 6)
+  seguranca_transito_fonte              String?  @db.VarChar(255)
+  saneamento_acesso_agua_bruto          Decimal? @db.Decimal(18, 6)
+  saneamento_acesso_agua_nota           Decimal? @db.Decimal(18, 6)
+  saneamento_acesso_agua_outlier        Decimal? @db.Decimal(18, 6)
+  saneamento_acesso_agua_meta           Decimal? @db.Decimal(18, 6)
+  saneamento_acesso_agua_fonte          String?  @db.VarChar(255)
+  saneamento_coleta_esgoto_bruto        Decimal? @db.Decimal(18, 6)
+  saneamento_coleta_esgoto_nota         Decimal? @db.Decimal(18, 6)
+  saneamento_coleta_esgoto_outlier      Decimal? @db.Decimal(18, 6)
+  saneamento_coleta_esgoto_meta         Decimal? @db.Decimal(18, 6)
+  saneamento_coleta_esgoto_fonte        String?  @db.VarChar(255)
+  saneamento_tratamento_esgoto_bruto    Decimal? @db.Decimal(18, 6)
+  saneamento_tratamento_esgoto_nota     Decimal? @db.Decimal(18, 6)
+  saneamento_tratamento_esgoto_outlier  Decimal? @db.Decimal(18, 6)
+  saneamento_tratamento_esgoto_meta     Decimal? @db.Decimal(18, 6)
+  saneamento_tratamento_esgoto_fonte    String?  @db.VarChar(255)
+  vulnerabilidade_social_bruto          Decimal? @db.Decimal(18, 6)
+  vulnerabilidade_social_nota           Decimal? @db.Decimal(18, 6)
+  vulnerabilidade_social_outlier        Decimal? @db.Decimal(18, 6)
+  vulnerabilidade_social_meta           Decimal? @db.Decimal(18, 6)
+  vulnerabilidade_social_fonte          String?  @db.VarChar(255)
+  indicador_fiscal                      Decimal? @db.Decimal(18, 6)
+  indicador_investimento_per_capita     Decimal? @db.Decimal(18, 6)
+  indicador_custo_legislativo           Decimal? @db.Decimal(18, 6)
+  indicador_equilibrio_previdenciario   Decimal? @db.Decimal(18, 6)
+  indicador_planejamento                Decimal? @db.Decimal(18, 6)
+  indicador_colaboradores               Decimal? @db.Decimal(18, 6)
+  indicador_transparencia               Decimal? @db.Decimal(18, 6)
+  indicador_saude                       Decimal? @db.Decimal(18, 6)
+  indicador_educacao                    Decimal? @db.Decimal(18, 6)
+  indicador_seguranca                   Decimal? @db.Decimal(18, 6)
+  indicador_saneamento_meio_ambiente    Decimal? @db.Decimal(18, 6)
+  indicador_vulnerabilidade_social      Decimal? @db.Decimal(18, 6)
+  dimensao_financas                     Decimal? @db.Decimal(18, 6)
+  dimensao_gestao                       Decimal? @db.Decimal(18, 6)
+  dimensao_desempenho                   Decimal? @db.Decimal(18, 6)
+  nota_final                            Decimal? @db.Decimal(18, 6)
+
+  @@id([ano, cod_ibge])
+}
+
+view colaboradores_comissionados {
+  cod_ibge Int @unique
+  Municipio String? @db.VarChar(255)
+  UF String? @map("UF_sigla")
+  populacao Decimal? @db.Decimal(15, 2)
+  servidores Decimal? @db.Decimal(25, 14)
+  comissionados Decimal? @db.Decimal(25, 14)
+  colaboradores_comissionados_bruto Decimal? @db.Decimal(25, 14)
+
+  @@map("colaboradores_comissionados")
+}
+
+
+view colaboradores_servidores {
+  cod_ibge Int @unique
+  Municipio String? @db.VarChar(255)
+  UF String? @map("UF_sigla")
+  populacao Decimal? @db.Decimal(15, 2)
+  servidores Decimal? @db.Decimal(25, 14)
+  comissionados Decimal? @db.Decimal(25, 14)
+  colaboradores_servidores_bruto Decimal? @db.Decimal(25, 14)
+
+  @@map("colaboradores_servidores")
+}
+
+view custo_legislativo {
+  cod_ibge Int @unique
+  dado_bruto Decimal? @db.Decimal(40, 2)
+  custo_legislativo_bruto Decimal? @db.Decimal(44, 6)
+
+  @@map("custo_legislativo")
+}
+
+view educacao_abandono {
+  cod_ibge Int @unique
+  uf_sigla String? @db.VarChar(10)
+  nome_ibge String? @db.VarChar(255)
+  educacao_abandono_bruto Decimal? @db.Decimal(18, 2)
+
+  @@map("educacao_abandono")
+}
+
+view educacao_creches {
+  cod_ibge Int @unique
+  uf_sigla String? @db.VarChar(10)
+  nome_ibge String? @db.VarChar(255)
+  educacao_creches_bruto Decimal? @db.Decimal(18, 6)
+
+  @@map("educacao_creches")
+}
+
+view educacao_ideb_anos_finais {
+  cod_ibge Int @unique
+  uf_sigla String? @db.VarChar(10)
+  nome_ibge String? @db.VarChar(255)
+  educacao_ideb_anos_finais_bruto Decimal? @db.Decimal(18, 6)
+
+  @@map("educacao_ideb_anos_finais")
+}
+
+view educacao_ideb_anos_iniciais {
+  cod_ibge Int @unique
+  uf_sigla String? @db.VarChar(10)
+  nome_ibge String? @db.VarChar(255)
+  educacao_ideb_anos_iniciais_bruto Decimal? @db.Decimal(18, 6)
+
+  @@map("educacao_ideb_anos_iniciais")
+}
+
+view educacao_taxa_distorcao {
+  cod_ibge Int @unique
+  uf_sigla String? @db.VarChar(10)
+  nome_ibge String? @db.VarChar(255)
+  educacao_taxa_distorcao_bruto Decimal? @db.Decimal(18, 6)
+
+  @@map("educacao_taxa_distorcao")
+}
+
+view equilibrio_previdenciario {
+  cod_ibge Int @unique
+  nome_ibge String? @db.VarChar(255)
+  uf_sigla String? @db.VarChar(10) @map("UF_sigla")
+  equilibrio_previdenciario_bruto Decimal? @db.Decimal(8, 1)
+
+  @@map("equilibrio_previdenciario")
+}
+
+view fiscal_autonomia {
+  cod_ibge Int @unique
+  nome_ibge String? @db.VarChar(255)
+  receitas_proprias Decimal? @db.Decimal(40, 2)
+  despesas_admin Decimal? @db.Decimal(42, 2)
+  saldo Decimal? @db.Decimal(42, 2)
+  fiscal_autonomia_bruto Decimal? @db.Decimal(48, 6)
+
+  @@map("fiscal_autonomia")
+}
+
+view fiscal_gasto_pessoal {
+  cod_ibge Int @unique
+  nome_ibge String? @db.VarChar(255)
+  despesa_com_pessoal Decimal? @db.Decimal(40, 2)
+  receita_corretes Decimal? @db.Decimal(40, 2)
+  fiscal_gasto_pessoal_bruto Decimal? @db.Decimal(46, 6)
+
+  @@map("fiscal_gasto_pessoal")
+}
+
+view fiscal_investimento {
+  cod_ibge Int @unique
+  nome_ibge String? @db.VarChar(255)
+  investimento_inversao Decimal? @db.Decimal(40, 2)
+  receita_total Decimal? @db.Decimal(40, 2)
+  fiscal_investimento_bruto Decimal? @db.Decimal(46, 6)
+
+  @@map("fiscal_investimento")
+}
+
+view fiscal_liquidez {
+  cod_ibge Int @unique
+  nome_ibge String? @db.VarChar(255)
+  caixa_equivalentes Decimal? @db.Decimal(40, 2)
+  restos_pagar Decimal? @db.Decimal(41, 2)
+  fiscal_liquidez_bruto Decimal? @db.Decimal(46, 6)
+
+  @@map("fiscal_liquidez")
+}
+
+view investimento_educacao {
+  cod_ibge Int @unique
+  dado_bruto Decimal @db.Decimal(40, 2)
+  investimento_educacao_bruto Decimal? @db.Decimal(44, 6)
+
+  @@map("investimento_educacao")
+}
+
+view investimento_saude {
+  cod_ibge Int @unique
+  dado_bruto Decimal? @db.Decimal(40, 2)
+  investimento_saude_bruto Decimal? @db.Decimal(44, 6)
+
+  @@map("investimento_saude")
+}
+
+view planejamento_captacao {
+  cod_ibge Int @unique
+  municipio String? @db.VarChar(255)
+  receita_corrente Decimal? @db.Decimal(40, 2)
+  transferencia_conta_1 Decimal? @db.Decimal(40, 2)
+  transferencia_conta_2 Decimal? @db.Decimal(40, 2)
+  receita_bruta Decimal? @db.Decimal(40, 2)
+  planejamento_captacao_bruto Decimal? @db.Decimal(50, 6)
+
+  @@map("planejamento_captacao")
+}
+
+view planejamento_despesa {
+  cod_ibge Int @unique
+  municipio String? @db.VarChar(255)
+  inscricao_restos Decimal? @db.Decimal(22, 6)
+  despesas_empenhadas Decimal? @db.Decimal(22, 6)
+  planejamento_despesa_bruto Decimal? @db.Decimal(35, 10)
+
+  @@map("planejamento_despesa")
+}
+
+view planejamento_lei_geral {
+  cod_ibge Int @unique
+  nome_ibge String? @db.VarChar(255)
+  planejamento_lei_geral_bruto Decimal? @db.Decimal(26, 7)
+
+  @@map("planejamento_lei_geral")
+}
+
+view saneamento_acesso_agua {
+  cod_ibge Int @unique
+  uf_sigla String? @db.VarChar(10)
+  nome_ibge String? @db.VarChar(255)
+  saneamento_acesso_agua_bruto Decimal? @db.Decimal(40, 6)
+
+  @@map("saneamento_acesso_agua")
+}
+
+view saneamento_coleta_esgoto {
+  cod_ibge Int @unique
+  uf_sigla String? @db.VarChar(10)
+  nome_ibge String? @db.VarChar(255)
+  saneamento_coleta_esgoto_bruto Decimal? @db.Decimal(40, 6)
+
+  @@map("saneamento_coleta_esgoto")
+}
+view saneamento_tratamento_esgoto {
+  cod_ibge Int @unique
+  uf_sigla String? @db.VarChar(10)
+  nome_ibge String? @db.VarChar(255)
+  populacao Int?
+  saneamento_tratamento_esgoto_bruto Decimal? @db.Decimal(40, 6)
+
+  @@map("saneamento_tratamento_esgoto")
+}
+
+view saude_cobertura {
+  cod_ibge Int @unique
+  uf_sigla String? @db.VarChar(10)
+  nome_ibge String? @db.VarChar(50)
+  cobertura String? @db.VarChar(255) @map("Cobertura_APS")
+  saude_cobertura_bruto Decimal? @db.Decimal(40, 6)
+
+  @@map("saude_cobertura")
+}
+
+view saude_mortalidade {
+  cod_ibge Int @unique
+  uf_sigla String? @db.VarChar(10)
+  nome_ibge String? @db.VarChar(255)
+  mortalidade String? @db.VarChar(255)
+  nascimentos String? @db.VarChar(255) @map("Nascimentos")
+  saude_mortalidade_bruto Decimal? @db.Decimal(40, 6)
+
+  @@map("saude_mortalidade")
+}
+
+view saude_vacina {
+  cod_ibge Int @unique
+  uf_sigla String? @db.VarChar(10)
+  nome_ibge String? @db.VarChar(50)
+  saude_vacina_bruto Decimal? @db.Decimal(18, 6)
+
+  @@map("saude_vacina")
+}
+
+view seguranca_homicidio {
+  cod_ibge Int @unique
+  uf_sigla String? @db.VarChar(10)
+  nome_ibge String? @db.VarChar(255)
+  dado_bruto String? @db.VarChar(255)
+  seguranca_homicidio_bruto Decimal? @db.Decimal(40, 6)
+
+  @@map("seguranca_homicidio")
+}
+
+view seguranca_transito {
+  cod_ibge Int @unique
+  uf_sigla String? @db.VarChar(10)
+  nome_ibge String? @db.VarChar(255)
+  dado_bruto String? @db.VarChar(255)
+  seguranca_transito_bruto Decimal? @db.Decimal(40, 6)
+
+  @@map("seguranca_transito")
+}
+
+view transparencia_cauc {
+  cod_ibge Int @unique
+  nome_ibge String? @db.VarChar(255)
+  nome_igm String? @db.VarChar(50)
+  uf String? @db.VarChar(50)
+  nome_mesclado String? @db.VarChar(103)
+  transparencia_cauc_bruto Decimal? @db.Decimal(40, 6)
+  pendencias BigInt
+  pendencias_legenda String? @db.Text
+  pendencias_legenda_individual String? @db.Text
+
+
+  @@map("transparencia_cauc")
+}
+
+view transparencia_indice {
+  cod_ibge Int @unique
+  nome_ibge String? @db.VarChar(255)
+  transparencia_indice_bruto Decimal? @db.Decimal(40, 6)
+
+  @@map("transparencia_indice")
+}
+
+view vulnerabilidade_social {
+  cod_ibge Int @unique
+  uf_sigla String? @db.VarChar(10)
+  nome_ibge String? @db.VarChar(255)
+  vulnerabilidade_social_bruto Decimal? @db.Decimal(40, 6)
+  quantidade String? @db.VarChar(100) @map("Quantidade")
+
+  @@map("vulnerabilidade_social")
 }
