@@ -35,22 +35,22 @@ const filtrarMunicipio: ItemPredicate<Municipio> = (
 
 const renderMunicipio: ItemRenderer<Municipio> = (
   municipio,
-  { handleClick, handleFocus, modifiers, query }
+  { handleClick, handleFocus, modifiers }
 ) => {
   if (!modifiers.matchesPredicate) {
     return null;
   }
   return (
-    <MenuItem
-      active={modifiers.active}
-      disabled={modifiers.disabled}
-      key={municipio.cod_ibge}
-      label={municipio.estado.toString()}
-      onClick={handleClick}
-      onFocus={handleFocus}
-      roleStructure="listoption"
-      text={`${municipio.nome} - ${municipio.estado}`}
-    />
+      <MenuItem
+        active={modifiers.active}
+        disabled={modifiers.disabled}
+        key={municipio.cod_ibge}
+        label={municipio.estado.toString()}
+        onClick={handleClick}
+        onFocus={handleFocus}
+        roleStructure="listoption"
+        text={`${municipio.nome} - ${municipio.estado}`}
+      />
   );
 };
 
@@ -61,6 +61,7 @@ export const SelectMunicipio = () => {
       <div>
         <Select<Municipio>
           items={ListaMunicipios}
+          fill
           itemPredicate={filtrarMunicipio}
           itemRenderer={renderMunicipio}
           noResults={
@@ -73,6 +74,7 @@ export const SelectMunicipio = () => {
           onItemSelect={setSelectedMunicipio}
         >
           <Button
+            fill
             text={selectedMunicipio?.nome ?? "Escolha um município"}
             endIcon="double-caret-vertical"
           />

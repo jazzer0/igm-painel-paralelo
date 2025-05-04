@@ -1,9 +1,11 @@
 @import "tailwindcss";
 @import "@blueprintjs/select/lib/css/blueprint-select.css";
 
-body {
-  background-color: #F8FAFC;
+#root {
+  position: absolute;
+  inset: 0;
 }
+
 
 *{
   margin: 0;
