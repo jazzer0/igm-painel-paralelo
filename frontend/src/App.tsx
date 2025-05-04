@@ -1,14 +1,13 @@
-import { useState } from 'react'
 import { CapagScreen } from './views/CapagScreen'
+import { QueryClientProvider } from '@tanstack/react-query'
+import { queryClient } from './config/query_client_config'  
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <div className='bg-[red] inset-0 absolute'>
-      <div className='max-w-[1200px] mx-auto flex bg-white'>
+    <div>
+      <QueryClientProvider client={queryClient}>
         <CapagScreen />
-      </div>
+      </QueryClientProvider>
     </div>
   )
 }
