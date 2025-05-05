@@ -11,6 +11,12 @@ export class PainelParaleloService {
     });
   }
 
+  async getAllMunicipios() {
+    return this.prismaService.ibge_localidades.findMany({
+      select: { cod_ibge: true, nome: true, UF_nome: true, UF_sigla: true },
+    });
+  }
+
   async getMunicipiosByEstado(estado: string) {
     return this.prismaService.ibge_localidades.findMany({
       where: {
