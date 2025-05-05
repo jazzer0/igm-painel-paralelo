@@ -62701,10 +62701,10 @@ export namespace Prisma {
 
   export type ibge_localidadesWhereUniqueInput = Prisma.AtLeast<{
     id?: number
+    cod_ibge?: number
     AND?: ibge_localidadesWhereInput | ibge_localidadesWhereInput[]
     OR?: ibge_localidadesWhereInput[]
     NOT?: ibge_localidadesWhereInput | ibge_localidadesWhereInput[]
-    cod_ibge?: IntFilter<"ibge_localidades"> | number
     nome?: StringNullableFilter<"ibge_localidades"> | string | null
     microrregiao?: StringNullableFilter<"ibge_localidades"> | string | null
     mesorregiao?: StringNullableFilter<"ibge_localidades"> | string | null
@@ -62713,7 +62713,7 @@ export namespace Prisma {
     regiao?: StringNullableFilter<"ibge_localidades"> | string | null
     regiao_imediata_id?: IntNullableFilter<"ibge_localidades"> | number | null
     regiao_imediata?: StringNullableFilter<"ibge_localidades"> | string | null
-  }, "id">
+  }, "id" | "cod_ibge">
 
   export type ibge_localidadesOrderByWithAggregationInput = {
     id?: SortOrder

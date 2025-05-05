@@ -5,6 +5,20 @@ import { PrismaService } from 'src/prisma/prisma.service';
 export class PainelParaleloService {
   constructor(private prismaService: PrismaService) {}
 
+  async getAllEstados() {
+    return this.prismaService.ibge_localidades.findMany({
+      distinct: ['UF_nome'],
+    });
+  }
+
+  async getMunicipiosByEstado(estado: string) {
+    return this.prismaService.ibge_localidades.findMany({
+      where: {
+        UF_nome: estado,
+      },
+    });
+  }
+
   async searchMunicipioByName(name: string) {
     return this.prismaService.ibge_localidades.findMany({
       where: {
@@ -15,7 +29,7 @@ export class PainelParaleloService {
   }
 
   async getMunicipioByCodIbge(codIbge: number) {
-    return this.prismaService.ibge_localidades.findUnique({
+    return this.prismaService.ibge_localidades.findFirst({
       where: { cod_ibge: codIbge },
     });
   }
@@ -51,6 +65,12 @@ export class PainelParaleloService {
       orderBy: {
         updated_at: 'desc',
       },
+    });
+  }
+
+  async getColaboradoresbyCodIbge(codIbge: number) {
+    return this.prismaService.colaboradores_comissionados.findMany({
+      where: { cod_ibge: codIbge },
     });
   }
 }
