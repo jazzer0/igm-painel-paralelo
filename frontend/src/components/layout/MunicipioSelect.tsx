@@ -2,7 +2,7 @@ import { Button, MenuItem } from "@blueprintjs/core";
 import { ItemPredicate, ItemRenderer, Select } from "@blueprintjs/select";
 import * as React from "react";
 
-export interface Municipio {
+interface Municipio {
   nome: string;
   estado: string;
   cod_ibge: number;

@@ -1,8 +1,4 @@
-/**
- * Tipos para os endpoints da API do Painel Paralelo
- */
-
-// Tipos baseados no modelo ibge_localidades
+// ibge_localidades
 export interface Municipio {
   id: number;
   cod_ibge: number;
@@ -16,12 +12,14 @@ export interface Municipio {
   regiao_imediata: string | null;
 }
 
-export type MunicipioSearchResult = Pick<
-  Municipio,
-  "cod_ibge" | "nome" | "UF_sigla" | "regiao"
->;
+export interface MunicipioBasic {
+  cod_ibge: number;
+  nome: string | null;
+  UF_sigla: string | null;
+  UF_nome: string | null;
+}
 
-// Tipos para fiscal_gasto_pessoal
+// fiscal_gasto_pessoal
 export interface GastoPessoal {
   cod_ibge: number;
   nome_ibge: string | null;
@@ -30,7 +28,7 @@ export interface GastoPessoal {
   fiscal_gasto_pessoal_bruto: number | null;
 }
 
-// Tipos para fiscal_liquidez
+// fiscal_liquidez
 export interface Liquidez {
   cod_ibge: number;
   nome_ibge: string | null;
@@ -39,7 +37,7 @@ export interface Liquidez {
   fiscal_liquidez_bruto: number | null;
 }
 
-// Tipos para transparencia_cauc
+// transparencia_cauc
 export interface CaucData {
   cod_ibge: number;
   nome_ibge: string | null;
@@ -52,14 +50,14 @@ export interface CaucData {
   pendencias_legenda_individual: string | null;
 }
 
-// Tipos para legenda_cauc
+// legenda_cauc
 export interface LegendaCauc {
   id: number;
   codigo_item: string;
   exigencia: string;
 }
 
-// Tipos para data_sources
+// data_sources
 export interface DataSource {
   file_base: string;
   file_name: string | null;
@@ -69,7 +67,7 @@ export interface DataSource {
   last_checked: Date;
 }
 
-// Tipos para colaboradores_comissionados
+// colaboradores_comissionados
 export interface Colaborador {
   cod_ibge: number;
   Municipio: string | null;
@@ -80,9 +78,7 @@ export interface Colaborador {
   colaboradores_comissionados_bruto: number | null;
 }
 
-/**
- * Tipos para as respostas da API
- */
+// response types
 export interface APIResponse<T> {
   success: boolean;
   data: T;
@@ -90,8 +86,8 @@ export interface APIResponse<T> {
   timestamp: string;
 }
 
-// Tipos específicos para cada endpoint
-export type MunicipioSearchResponse = APIResponse<MunicipioSearchResult[]>;
+// params
+export type MunicipioSearchResponse = APIResponse<MunicipioBasic[]>;
 export type MunicipioResponse = APIResponse<Municipio>;
 export type GastoPessoalResponse = APIResponse<GastoPessoal>;
 export type LiquidezResponse = APIResponse<Liquidez>;
@@ -100,9 +96,6 @@ export type LegendaCaucResponse = APIResponse<LegendaCauc[]>;
 export type DataSourcesResponse = APIResponse<DataSource[]>;
 export type ColaboradoresResponse = APIResponse<Colaborador[]>;
 
-/**
- * Tipos para parâmetros das queries
- */
 export interface MunicipioSearchParams {
   name: string;
 }
@@ -111,9 +104,7 @@ export interface CodIbgeParams {
   codIbge: number;
 }
 
-/**
- * Tipo para erros da API
- */
+// error handling
 export interface APIError {
   statusCode: number;
   message: string;

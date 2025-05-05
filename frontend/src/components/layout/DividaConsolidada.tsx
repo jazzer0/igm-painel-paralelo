@@ -7,7 +7,7 @@ import { useTheme } from '../../context/ThemeContext';
 
 Chart.register(CategoryScale, LinearScale, BarElement);
 
-export const DividaConsolidada = ({ data }: { data: [] }) => {
+export const DividaConsolidada = ({ data }: { data: number[] }) => {
   const { darkMode } = useTheme();
 
   const chartData = {

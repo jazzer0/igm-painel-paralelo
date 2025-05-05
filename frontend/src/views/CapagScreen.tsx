@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { SelectMunicipio } from "../components/layout/MunicipioSelect";
-import { getMunicipio } from "../queries/ibge_localidades";
+import { getMunicipio } from "../queries/capagScreenQueries";
 import { Divider, Icon } from "@blueprintjs/core";
 import { useTheme } from "../context/ThemeContext";
 import { GastoPessoal } from "../components/layout/GastoPessoal";
