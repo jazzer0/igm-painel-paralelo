@@ -120,7 +120,7 @@ enum Capital {
 
 model ibge_localidades {
   id                 Int     @id @default(autoincrement())
-  cod_ibge           Int
+  cod_ibge           Int     @unique
   nome               String? @db.VarChar(255)
   microrregiao       String? @db.VarChar(255)
   mesorregiao        String? @db.VarChar(255)
