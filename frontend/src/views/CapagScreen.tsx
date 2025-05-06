@@ -1,6 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
 import { SelectMunicipio } from "../components/layout/MunicipioSelect";
-import { getMunicipio } from "../queries/capagScreenQueries";
 import { Divider, Icon } from "@blueprintjs/core";
 import { useTheme } from "../context/ThemeContext";
 import { GastoPessoal } from "../components/layout/GastoPessoal";
@@ -10,7 +9,6 @@ import { Cauc } from "../components/layout/Cauc";
 import { Container } from "../components/layout/Container";
 
 export const CapagScreen = () => {
-  const { data } = useQuery({ queryFn: getMunicipio, queryKey: ["cod_ibge"] });
   const { darkMode, toggleTheme } = useTheme();
   return (
     <Container>
@@ -65,7 +63,7 @@ export const CapagScreen = () => {
                     {title}
                   </h3>
                   <p className={darkMode ? "text-gray-400" : "text-gray-600"}>
-                    {data?.estado || "N/A"}
+                    {/* {data?.estado || "N/A"} */}
                   </p>
                 </div>
               ))}

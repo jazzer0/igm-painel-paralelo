@@ -10,7 +10,7 @@ import {
   ColaboradoresResponse
 } from '../types/capagEndpoints';
 
-const API_URL = process.env.CAPAG_API_URL;
+const API_URL = import.meta.env.VITE_CAPAG_API_URL;
 
 export const getAllMunicipios = async (): Promise<MunicipioBasic> => {
   const response = await axios.get(`${API_URL}/municipios/all`);

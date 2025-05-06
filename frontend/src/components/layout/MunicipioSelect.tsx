@@ -1,17 +1,16 @@
 import { Button, MenuItem } from "@blueprintjs/core";
 import { ItemPredicate, ItemRenderer, Select } from "@blueprintjs/select";
+import { useQuery } from "@tanstack/react-query";
 import * as React from "react";
+import { getAllMunicipios } from "../../queries/capagQueries";
+import { MunicipioBasic } from "../../types/capagEndpoints";
 
-interface Municipio {
+export interface Municipio {
   nome: string;
-  estado: string;
+  UF_nome: string;
+  UF_sigla: string;
   cod_ibge: number;
 }
-
-const ListaMunicipios: Municipio[] = [
-  { nome: "Acrelândia", estado: "AC", cod_ibge: 1 },
-  { nome: "Alta Floresta D'Oeste", estado: "AC", cod_ibge: 2 },
-].map((f, index) => ({ ...f, rank: index + 1 }));
 
 const filtrarMunicipio: ItemPredicate<Municipio> = (
   query,
@@ -41,26 +40,34 @@ const renderMunicipio: ItemRenderer<Municipio> = (
     return null;
   }
   return (
-      <MenuItem
-        active={modifiers.active}
-        disabled={modifiers.disabled}
-        key={municipio.cod_ibge}
-        label={municipio.estado.toString()}
-        onClick={handleClick}
-        onFocus={handleFocus}
-        roleStructure="listoption"
-        text={`${municipio.nome} - ${municipio.estado}`}
-      />
+    <MenuItem
+      active={modifiers.active}
+      disabled={modifiers.disabled}
+      key={municipio.cod_ibge}
+      label={municipio.estado.toString()}
+      onClick={handleClick}
+      onFocus={handleFocus}
+      roleStructure="listoption"
+      text={`${municipio.nome} - ${municipio.estado}`}
+    />
   );
 };
 
 export const SelectMunicipio = () => {
-    const [selectedMunicipio, setSelectedMunicipio] = React.useState<Municipio | undefined>();
+  const [selectedMunicipio, setSelectedMunicipio] = React.useState<
+    Municipio | undefined
+  >();
+  const { data: ListaMunicipios } = useQuery({
+    queryKey: ["municipiosSelectData"],
+    queryFn: getAllMunicipios,
+  }); 
+  console.log(">>>>>>> ", ListaMunicipios);
+
   return (
     <div className="flex flex-col gap-4">
       <div>
         <Select<Municipio>
-          items={ListaMunicipios}
+          items={[]}
           fill
           itemPredicate={filtrarMunicipio}
           itemRenderer={renderMunicipio}
