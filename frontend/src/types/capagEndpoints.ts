@@ -24,7 +24,7 @@ export interface GastoPessoal {
   cod_ibge: number;
   nome_ibge: string | null;
   despesa_com_pessoal: number | null;
-  receita_corretes: number | null;
+  receita_corrente_liquida: number | null;
   fiscal_gasto_pessoal_bruto: number | null;
 }
 
@@ -78,7 +78,7 @@ export interface Colaborador {
   colaboradores_comissionados_bruto: number | null;
 }
 
-// response types
+// response typesjuli
 export interface APIResponse<T> {
   success: boolean;
   data: T;
@@ -88,26 +88,10 @@ export interface APIResponse<T> {
 
 // params
 export type MunicipioSearchResponse = APIResponse<MunicipioBasic[]>;
-export type MunicipioResponse = APIResponse<Municipio>;
-export type GastoPessoalResponse = APIResponse<GastoPessoal>;
-export type LiquidezResponse = APIResponse<Liquidez>;
-export type CaucDataResponse = APIResponse<CaucData>;
-export type LegendaCaucResponse = APIResponse<LegendaCauc[]>;
-export type DataSourcesResponse = APIResponse<DataSource[]>;
-export type ColaboradoresResponse = APIResponse<Colaborador[]>;
-
-export interface MunicipioSearchParams {
-  name: string;
-}
-
-export interface CodIbgeParams {
-  codIbge: number;
-}
-
-// error handling
-export interface APIError {
-  statusCode: number;
-  message: string;
-  error?: string;
-  timestamp: string;
-}
+export type MunicipioResponse = Municipio
+export type GastoPessoalResponse = GastoPessoal
+export type LiquidezResponse = Liquidez
+export type CaucDataResponse = CaucData
+export type LegendaCaucResponse = LegendaCauc
+export type DataSourcesResponse = DataSource
+export type ColaboradoresResponse = Colaborador

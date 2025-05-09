@@ -576,7 +576,7 @@ model una_colada {
 view colaboradores_comissionados {
   cod_ibge Int @unique
   Municipio String? @db.VarChar(255)
-  UF String? @map("UF_sigla")
+  UF String?
   populacao Decimal? @db.Decimal(15, 2)
   servidores Decimal? @db.Decimal(25, 14)
   comissionados Decimal? @db.Decimal(25, 14)
@@ -589,7 +589,7 @@ view colaboradores_comissionados {
 view colaboradores_servidores {
   cod_ibge Int @unique
   Municipio String? @db.VarChar(255)
-  UF String? @map("UF_sigla")
+  UF String?
   populacao Decimal? @db.Decimal(15, 2)
   servidores Decimal? @db.Decimal(25, 14)
   comissionados Decimal? @db.Decimal(25, 14)
@@ -675,7 +675,7 @@ view fiscal_gasto_pessoal {
   cod_ibge Int @unique
   nome_ibge String? @db.VarChar(255)
   despesa_com_pessoal Decimal? @db.Decimal(40, 2)
-  receita_corretes Decimal? @db.Decimal(40, 2)
+  receita_corrente_liquida Decimal? @db.Decimal(40, 2)
   fiscal_gasto_pessoal_bruto Decimal? @db.Decimal(46, 6)
 
   @@map("fiscal_gasto_pessoal")

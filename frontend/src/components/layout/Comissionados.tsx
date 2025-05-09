@@ -5,31 +5,32 @@ import { useEffect, useState } from "react";
 
 Chart.register(ArcElement);
 
-export interface LiquidezProps {
+export interface ComissionadosProps {
   cod_ibge?: number;
-  nome_ibge?: string | null;
-  caixa_equivalentes?: number | null;
-  restos_pagar?: number | null;
-  fiscal_liquidez_bruto?: number | null;
+  populacao?: number | null;
+  servidores?: number | null;
+  comissionados?: number | null;
+  colaboradores_comissionados_bruto?: number | null;
 }
 
-export const Liquidez = ({
-  fiscal_liquidez_bruto,
-  caixa_equivalentes,
-  restos_pagar,
-}: LiquidezProps) => {
+export const Comissionados = ({
+  colaboradores_comissionados_bruto,
+  populacao,
+  servidores,
+  comissionados,
+}: ComissionadosProps) => {
   const [clampedValue, setClampedValue] = useState(0);
 
   useEffect(() => {
-    const rawValue = Number(fiscal_liquidez_bruto) * 100 || 0;
+    const rawValue = Number(colaboradores_comissionados_bruto) || 0;
     setClampedValue(Math.min(Math.max(rawValue, 0), 100));
-  }, [fiscal_liquidez_bruto]);
+  }, [colaboradores_comissionados_bruto]);
 
   const chartData = {
     datasets: [
       {
         data: [clampedValue, 100 - clampedValue],
-        backgroundColor: [Colors.GREEN3, Colors.LIGHT_GRAY3],
+        backgroundColor: [Colors.BLUE3, Colors.LIGHT_GRAY3],
         borderWidth: 0,
       },
     ],
@@ -47,17 +48,22 @@ export const Liquidez = ({
     cutout: "75%",
   };
 
+  const formatValue = (value: number | null | undefined) => {
+    if (value === null || value === undefined) return "N/A";
+    return value.toLocaleString("pt-BR");
+  };
+
   return (
     <Card elevation={Elevation.ONE} interactive={true} className="flex flex-col justify-between h-96">
       <div>
         <div className="flex justify-between items-center mb-4">
-          <h3 className="bp5-heading">Liquidez Geral</h3>
+          <h3 className="bp5-heading">Servidores e Comissionados</h3>
           <Tooltip
             content={
               <div className="p-2">
-                <p className="mb-2">Razão: Caixa e Equivalentes/Restos a Pagar</p>
-                <p>Dados contábeis: FINBRA/Contas Anuais</p>
-                <p>Dados contábeis: SICONFI/2024</p>
+                <p className="mb-2">Razão: Comissionados/Servidores</p>
+                <p className="mb-2">Dados de População: IBGE/2025</p>
+                <p>Dados de Servidores: IBGE - Munic/2023</p>
               </div>
             }
           >
@@ -69,7 +75,7 @@ export const Liquidez = ({
           <Doughnut data={chartData} options={chartOptions} />
           <div className="absolute inset-0 flex items-center justify-center">
             <span className="bp5-heading text-2xl">
-              {clampedValue.toFixed(2)}%
+              {clampedValue.toFixed(2).replace('.', ',')}%
             </span>
           </div>
         </div>
@@ -79,8 +85,9 @@ export const Liquidez = ({
         <Tooltip
           content={
             <div className="p-2">
-              <p>Caixa: {caixa_equivalentes?.toLocaleString("pt-BR", { style: "currency", currency: "BRL" }) || "N/A"}</p>
-              <p>Restos a Pagar: {restos_pagar?.toLocaleString("pt-BR", { style: "currency", currency: "BRL" }) || "N/A"}</p>
+              <p>População: {formatValue(populacao)}</p>
+              <p>Servidores: {formatValue(servidores)}</p>
+              <p>Comissionados: {formatValue(comissionados)}</p>
             </div>
           }
           position={Position.RIGHT}

@@ -1,18 +1,18 @@
 import axios from 'axios';
 import {
-  MunicipioBasic,
   MunicipioResponse,
   GastoPessoalResponse,
   LiquidezResponse,
   CaucDataResponse,
   LegendaCaucResponse,
   DataSourcesResponse,
-  ColaboradoresResponse
+  ColaboradoresResponse,
+  MunicipioSearchResponse,
 } from '../types/capagEndpoints';
 
 const API_URL = import.meta.env.VITE_CAPAG_API_URL;
 
-export const getAllMunicipios = async (): Promise<MunicipioBasic> => {
+export const getAllMunicipios = async (): Promise<MunicipioSearchResponse> => {
   const response = await axios.get(`${API_URL}/municipios/all`);
   return response.data;
 };

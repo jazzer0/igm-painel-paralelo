@@ -735,7 +735,7 @@ exports.Prisma.Fiscal_gasto_pessoalScalarFieldEnum = {
   cod_ibge: 'cod_ibge',
   nome_ibge: 'nome_ibge',
   despesa_com_pessoal: 'despesa_com_pessoal',
-  receita_corretes: 'receita_corretes',
+  receita_corrente_liquida: 'receita_corrente_liquida',
   fiscal_gasto_pessoal_bruto: 'fiscal_gasto_pessoal_bruto'
 };
 

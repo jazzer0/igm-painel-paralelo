@@ -16,3 +16,14 @@
   button {
     outline: none !important;
   }
+  .dark {
+    --background-color: #000;
+  }
+  
+  .light {
+    --background-color: #fff;
+  }
+  body {
+    background-color: var(--background-color);
+    transition: background-color 0.3s ease;
+  }
