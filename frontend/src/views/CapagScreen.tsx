@@ -6,10 +6,10 @@ import {
   Elevation,
   Icon,
   Spinner,
+  Tooltip,
 } from "@blueprintjs/core";
 import { GastoPessoal } from "../components/layout/GastoPessoal";
 import { Liquidez } from "../components/layout/Liquidez";
-import { DividaConsolidada } from "../components/layout/DividaConsolidada";
 import { Cauc } from "../components/layout/Cauc";
 import { Container } from "../components/layout/Container";
 import {
@@ -56,17 +56,18 @@ export const CapagScreen = () => {
     enabled: !!selectedMunicipio,
   });
 
-  const { data: caucData, isLoading: isLoadingCauc } = useQuery({
+  const { data: caucData, isLoading: isLoadingCaucData } = useQuery({
     queryKey: ["cauc", selectedMunicipio?.cod_ibge],
     queryFn: () => getCaucDataByCodIbge(selectedMunicipio!.cod_ibge),
     enabled: !!selectedMunicipio,
   });
 
-  const { data: colaboradoresData } = useQuery({
-    queryKey: ["colaboradores", selectedMunicipio?.cod_ibge],
-    queryFn: () => getColaboradoresByCodIbge(selectedMunicipio!.cod_ibge),
-    enabled: !!selectedMunicipio,
-  });
+  const { data: colaboradoresData, isLoading: isLoadingColaboradores } =
+    useQuery({
+      queryKey: ["colaboradores", selectedMunicipio?.cod_ibge],
+      queryFn: () => getColaboradoresByCodIbge(selectedMunicipio!.cod_ibge),
+      enabled: !!selectedMunicipio,
+    });
 
   const { data: municipioDetalhes, isLoading: isLoadingDetalhes } = useQuery({
     queryKey: ["municipio-detalhes", selectedMunicipio?.cod_ibge],
@@ -74,10 +75,11 @@ export const CapagScreen = () => {
     enabled: !!selectedMunicipio,
   });
 
-  const { data: legendaCaucData } = useQuery({
-    queryKey: ["legenda-cauc"],
-    queryFn: getAllLegendaCauc,
-  });
+  const { data: legendaCaucData = [], isLoading: isLoadingLegendaCauc } =
+    useQuery({
+      queryKey: ["legenda-cauc"],
+      queryFn: getAllLegendaCauc,
+    });
 
   /*const { data: dividaData, isLoading: isLoadingDivida } = useQuery({
     queryKey: ['divida', selectedMunicipio?.cod_ibge],
@@ -85,37 +87,55 @@ export const CapagScreen = () => {
     enabled: hasRequestedData && !!selectedMunicipio,
   });*/
 
-  const isLoadingAny = isLoadingLiquidez || isLoadingGasto || isLoadingCauc;
+  const isLoadingCauc = isLoadingCaucData || isLoadingLegendaCauc;
+
+  const LoadingWrapper = ({
+    isLoading,
+    children,
+    height = "h-auto",
+  }: {
+    isLoading: boolean;
+    children: React.ReactNode;
+    height?: string;
+  }) => {
+    return isLoading ? (
+      <div className={`${height} flex items-center justify-center`}>
+        <Spinner size={40} />
+      </div>
+    ) : (
+      <>{children}</>
+    );
+  };
 
   console.log(colaboradoresData);
 
   return (
     <Container>
       <div
-        className={`min-h-screen p-6 ${darkMode ? "bp5-dark" : "bp5-light"}`}
+        className={`flex-1 flex flex-col ${
+          darkMode ? "bp5-dark" : "bp5-light"
+        }`}
       >
-        <div className="max-w-7xl mx-auto">
-          <div className="flex items-center mb-6 justify-center">
-            <h1 className="bp5-heading mx-auto">
-              Painel de Acompanhamento Fiscal Municipal
-            </h1>
-            <Icon
-              icon={darkMode ? "flash" : "moon"}
-              className="cursor-pointer ml-4"
-              onClick={toggleTheme}
-            />
-          </div>
+        <div className="flex items-center justify-between mb-4">
+          <h1 className="bp5-heading !mb-0">
+            Painel de Acompanhamento Fiscal Municipal
+          </h1>
+          <Icon
+            icon={darkMode ? "flash" : "moon"}
+            className="cursor-pointer"
+            onClick={toggleTheme}
+          />
         </div>
 
         <Divider />
 
-        <div className="mb-6">
+        <div className="mb-4 flex-shrink-0">
           {!showSearch && (
             <Button
               icon="search"
               text="Buscar Município"
               onClick={() => setShowSearch(true)}
-              className="mb-4"
+              className="w-full md:w-auto"
             />
           )}
 
@@ -124,7 +144,7 @@ export const CapagScreen = () => {
               <div className="flex gap-4 mb-4">
                 <Button
                   icon="cross"
-                  minimal
+                  variant="minimal"
                   onClick={() => {
                     setShowSearch(false);
                     setSelectedMunicipio(null);
@@ -153,71 +173,82 @@ export const CapagScreen = () => {
         </div>
 
         {selectedMunicipio && (
-          <>
+          <div className="flex-1 pb-4">
             <Divider />
             <div className="flex flex-col gap-4 mt-6">
               <h2 className="bp5-heading">
                 Dados de {selectedMunicipio.nome} - {selectedMunicipio.UF_sigla}
               </h2>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                {[
-                  {
-                    title: "Microrregião",
-                    value: municipioDetalhes?.microrregiao,
-                  },
-                  {
-                    title: "Mesorregião",
-                    value: municipioDetalhes?.mesorregiao,
-                  },
-                  { title: "Estado", value: municipioDetalhes?.UF_sigla },
-                  { title: "Região", value: municipioDetalhes?.regiao },
-                ].map((item, index) => (
-                  <Card
-                    key={index}
-                    elevation={Elevation.ONE}
-                    interactive={true}
-                    className="hover:bp5-elevation-4 transition-all"
-                  >
-                    <h5
-                      className={`bp5-heading ${
-                        darkMode ? "text-gray-300" : "text-gray-700"
-                      }`}
+              <LoadingWrapper isLoading={isLoadingDetalhes}>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-2 mt-2">
+                  {[
+                    {
+                      title: "Microrregião",
+                      value: municipioDetalhes?.microrregiao,
+                    },
+                    {
+                      title: "Mesorregião",
+                      value: municipioDetalhes?.mesorregiao,
+                    },
+                    { title: "Estado", value: municipioDetalhes?.UF_sigla },
+                    { title: "Região", value: municipioDetalhes?.regiao },
+                  ].map((item, index) => (
+                    <Card
+                      key={index}
+                      elevation={Elevation.ONE}
+                      interactive={true}
+                      className="hover:bp5-elevation-4 transition-all"
                     >
-                      {item.title}
-                    </h5>
-                    <p
-                      className={`mt-2 ${
-                        darkMode ? "text-gray-400" : "text-gray-600"
-                      }`}
-                    >
-                      {item.value || "N/A"}
-                    </p>
-                  </Card>
-                ))}
-              </div>
-
-              {isLoadingGasto ? (
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-8">
-                  {[1, 2, 3, 4].map((i) => (
-                    <Card key={i} className="h-48">
-                      <Spinner className="mt-8" />
+                      <h5 className={"bp5-heading"}>{item.title}</h5>
+                      <p className={"mt-2"}>{item.value || "N/A"}</p>
                     </Card>
                   ))}
                 </div>
-              ) : (
-                <>
-                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-8">
-                    <DividaConsolidada data={[]} />
-                    <GastoPessoal {...gastoPessoalData} />
-                    <Liquidez {...liquidezData} />
-                    <Comissionados {...colaboradoresData} />
-                  </div>
-                  {/* <Cauc data={caucData} legendaCauc={legendaCaucData || []} /> */}
-                </>
-              )}
+              </LoadingWrapper>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
+                {/* <DividaConsolidada data={[]} /> */}
+                <LoadingWrapper isLoading={isLoadingLiquidez} height="h-full">
+                  <Liquidez {...liquidezData} />
+                </LoadingWrapper>
+
+                <LoadingWrapper isLoading={isLoadingGasto} height="h-full">
+                  <GastoPessoal {...gastoPessoalData} />
+                </LoadingWrapper>
+
+                <LoadingWrapper
+                  isLoading={isLoadingColaboradores}
+                  height="h-full"
+                >
+                  <Comissionados {...colaboradoresData} />
+                </LoadingWrapper>
+              </div>
+              <div className="relative mt-4">
+                <div className="flex items-center gap-2 mb-2">
+                  <h3 className="bp5-heading !text-lg">CAUC</h3>
+                  <Tooltip
+                    position="bottom"
+                    hoverOpenDelay={100}
+                    hoverCloseDelay={200}
+                    usePortal={false}
+                    content="Cadastro de Adimplência de Unidades Gestoras"
+                  >
+                    <Button
+                      icon="info-sign"
+                      variant="minimal"
+                      className="hover:bp5-elevation-2"
+                    />
+                  </Tooltip>
+                </div>
+                <p className="bp5-text-muted !text-sm mb-3">
+                  Grupos de Exigências
+                </p>
+                <LoadingWrapper isLoading={isLoadingCauc} height="h-32">
+                  <Cauc data={caucData} legendaCauc={legendaCaucData} />
+                </LoadingWrapper>
+              </div>
             </div>
-          </>
+          </div>
         )}
       </div>
     </Container>

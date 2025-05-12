@@ -57820,7 +57820,7 @@ export namespace Prisma {
   export type Transparencia_caucSumAggregateOutputType = {
     cod_ibge: number | null
     transparencia_cauc_bruto: Decimal | null
-    pendencias: bigint | null
+    pendencias: number | null
   }
 
   export type Transparencia_caucMinAggregateOutputType = {
@@ -57830,7 +57830,7 @@ export namespace Prisma {
     uf: string | null
     nome_mesclado: string | null
     transparencia_cauc_bruto: Decimal | null
-    pendencias: bigint | null
+    pendencias: number | null
     pendencias_legenda: string | null
     pendencias_legenda_individual: string | null
   }
@@ -57842,7 +57842,7 @@ export namespace Prisma {
     uf: string | null
     nome_mesclado: string | null
     transparencia_cauc_bruto: Decimal | null
-    pendencias: bigint | null
+    pendencias: number | null
     pendencias_legenda: string | null
     pendencias_legenda_individual: string | null
   }
@@ -58003,7 +58003,7 @@ export namespace Prisma {
     uf: string | null
     nome_mesclado: string | null
     transparencia_cauc_bruto: Decimal | null
-    pendencias: bigint
+    pendencias: number
     pendencias_legenda: string | null
     pendencias_legenda_individual: string | null
     _count: Transparencia_caucCountAggregateOutputType | null
@@ -58065,7 +58065,7 @@ export namespace Prisma {
       uf: string | null
       nome_mesclado: string | null
       transparencia_cauc_bruto: Prisma.Decimal | null
-      pendencias: bigint
+      pendencias: number
       pendencias_legenda: string | null
       pendencias_legenda_individual: string | null
     }, ExtArgs["result"]["transparencia_cauc"]>
@@ -58443,7 +58443,7 @@ export namespace Prisma {
     readonly uf: FieldRef<"transparencia_cauc", 'String'>
     readonly nome_mesclado: FieldRef<"transparencia_cauc", 'String'>
     readonly transparencia_cauc_bruto: FieldRef<"transparencia_cauc", 'Decimal'>
-    readonly pendencias: FieldRef<"transparencia_cauc", 'BigInt'>
+    readonly pendencias: FieldRef<"transparencia_cauc", 'Int'>
     readonly pendencias_legenda: FieldRef<"transparencia_cauc", 'String'>
     readonly pendencias_legenda_individual: FieldRef<"transparencia_cauc", 'String'>
   }
@@ -62124,13 +62124,6 @@ export namespace Prisma {
    * Reference to a field of type 'Boolean'
    */
   export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
-    
-
-
-  /**
-   * Reference to a field of type 'BigInt'
-   */
-  export type BigIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BigInt'>
     
   /**
    * Deep Input Types
@@ -66592,7 +66585,7 @@ export namespace Prisma {
     uf?: StringNullableFilter<"transparencia_cauc"> | string | null
     nome_mesclado?: StringNullableFilter<"transparencia_cauc"> | string | null
     transparencia_cauc_bruto?: DecimalNullableFilter<"transparencia_cauc"> | Decimal | DecimalJsLike | number | string | null
-    pendencias?: BigIntFilter<"transparencia_cauc"> | bigint | number
+    pendencias?: IntFilter<"transparencia_cauc"> | number
     pendencias_legenda?: StringNullableFilter<"transparencia_cauc"> | string | null
     pendencias_legenda_individual?: StringNullableFilter<"transparencia_cauc"> | string | null
   }
@@ -66620,7 +66613,7 @@ export namespace Prisma {
     uf?: StringNullableFilter<"transparencia_cauc"> | string | null
     nome_mesclado?: StringNullableFilter<"transparencia_cauc"> | string | null
     transparencia_cauc_bruto?: DecimalNullableFilter<"transparencia_cauc"> | Decimal | DecimalJsLike | number | string | null
-    pendencias?: BigIntFilter<"transparencia_cauc"> | bigint | number
+    pendencias?: IntFilter<"transparencia_cauc"> | number
     pendencias_legenda?: StringNullableFilter<"transparencia_cauc"> | string | null
     pendencias_legenda_individual?: StringNullableFilter<"transparencia_cauc"> | string | null
   }, "cod_ibge">
@@ -66652,7 +66645,7 @@ export namespace Prisma {
     uf?: StringNullableWithAggregatesFilter<"transparencia_cauc"> | string | null
     nome_mesclado?: StringNullableWithAggregatesFilter<"transparencia_cauc"> | string | null
     transparencia_cauc_bruto?: DecimalNullableWithAggregatesFilter<"transparencia_cauc"> | Decimal | DecimalJsLike | number | string | null
-    pendencias?: BigIntWithAggregatesFilter<"transparencia_cauc"> | bigint | number
+    pendencias?: IntWithAggregatesFilter<"transparencia_cauc"> | number
     pendencias_legenda?: StringNullableWithAggregatesFilter<"transparencia_cauc"> | string | null
     pendencias_legenda_individual?: StringNullableWithAggregatesFilter<"transparencia_cauc"> | string | null
   }
@@ -71856,7 +71849,7 @@ export namespace Prisma {
     uf?: string | null
     nome_mesclado?: string | null
     transparencia_cauc_bruto?: Decimal | DecimalJsLike | number | string | null
-    pendencias: bigint | number
+    pendencias: number
     pendencias_legenda?: string | null
     pendencias_legenda_individual?: string | null
   }
@@ -71868,7 +71861,7 @@ export namespace Prisma {
     uf?: string | null
     nome_mesclado?: string | null
     transparencia_cauc_bruto?: Decimal | DecimalJsLike | number | string | null
-    pendencias: bigint | number
+    pendencias: number
     pendencias_legenda?: string | null
     pendencias_legenda_individual?: string | null
   }
@@ -71880,7 +71873,7 @@ export namespace Prisma {
     uf?: NullableStringFieldUpdateOperationsInput | string | null
     nome_mesclado?: NullableStringFieldUpdateOperationsInput | string | null
     transparencia_cauc_bruto?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
-    pendencias?: BigIntFieldUpdateOperationsInput | bigint | number
+    pendencias?: IntFieldUpdateOperationsInput | number
     pendencias_legenda?: NullableStringFieldUpdateOperationsInput | string | null
     pendencias_legenda_individual?: NullableStringFieldUpdateOperationsInput | string | null
   }
@@ -71892,7 +71885,7 @@ export namespace Prisma {
     uf?: NullableStringFieldUpdateOperationsInput | string | null
     nome_mesclado?: NullableStringFieldUpdateOperationsInput | string | null
     transparencia_cauc_bruto?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
-    pendencias?: BigIntFieldUpdateOperationsInput | bigint | number
+    pendencias?: IntFieldUpdateOperationsInput | number
     pendencias_legenda?: NullableStringFieldUpdateOperationsInput | string | null
     pendencias_legenda_individual?: NullableStringFieldUpdateOperationsInput | string | null
   }
@@ -71904,7 +71897,7 @@ export namespace Prisma {
     uf?: string | null
     nome_mesclado?: string | null
     transparencia_cauc_bruto?: Decimal | DecimalJsLike | number | string | null
-    pendencias: bigint | number
+    pendencias: number
     pendencias_legenda?: string | null
     pendencias_legenda_individual?: string | null
   }
@@ -71916,7 +71909,7 @@ export namespace Prisma {
     uf?: NullableStringFieldUpdateOperationsInput | string | null
     nome_mesclado?: NullableStringFieldUpdateOperationsInput | string | null
     transparencia_cauc_bruto?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
-    pendencias?: BigIntFieldUpdateOperationsInput | bigint | number
+    pendencias?: IntFieldUpdateOperationsInput | number
     pendencias_legenda?: NullableStringFieldUpdateOperationsInput | string | null
     pendencias_legenda_individual?: NullableStringFieldUpdateOperationsInput | string | null
   }
@@ -71928,7 +71921,7 @@ export namespace Prisma {
     uf?: NullableStringFieldUpdateOperationsInput | string | null
     nome_mesclado?: NullableStringFieldUpdateOperationsInput | string | null
     transparencia_cauc_bruto?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
-    pendencias?: BigIntFieldUpdateOperationsInput | bigint | number
+    pendencias?: IntFieldUpdateOperationsInput | number
     pendencias_legenda?: NullableStringFieldUpdateOperationsInput | string | null
     pendencias_legenda_individual?: NullableStringFieldUpdateOperationsInput | string | null
   }
@@ -75868,17 +75861,6 @@ export namespace Prisma {
     seguranca_transito_bruto?: SortOrder
   }
 
-  export type BigIntFilter<$PrismaModel = never> = {
-    equals?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    in?: bigint[] | number[]
-    notIn?: bigint[] | number[]
-    lt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    lte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    gte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    not?: NestedBigIntFilter<$PrismaModel> | bigint | number
-  }
-
   export type transparencia_caucOrderByRelevanceInput = {
     fields: transparencia_caucOrderByRelevanceFieldEnum | transparencia_caucOrderByRelevanceFieldEnum[]
     sort: SortOrder
@@ -75931,22 +75913,6 @@ export namespace Prisma {
     cod_ibge?: SortOrder
     transparencia_cauc_bruto?: SortOrder
     pendencias?: SortOrder
-  }
-
-  export type BigIntWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    in?: bigint[] | number[]
-    notIn?: bigint[] | number[]
-    lt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    lte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    gte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    not?: NestedBigIntWithAggregatesFilter<$PrismaModel> | bigint | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedBigIntFilter<$PrismaModel>
-    _min?: NestedBigIntFilter<$PrismaModel>
-    _max?: NestedBigIntFilter<$PrismaModel>
   }
 
   export type transparencia_indiceOrderByRelevanceInput = {
@@ -76149,14 +76115,6 @@ export namespace Prisma {
     decrement?: Decimal | DecimalJsLike | number | string
     multiply?: Decimal | DecimalJsLike | number | string
     divide?: Decimal | DecimalJsLike | number | string
-  }
-
-  export type BigIntFieldUpdateOperationsInput = {
-    set?: bigint | number
-    increment?: bigint | number
-    decrement?: bigint | number
-    multiply?: bigint | number
-    divide?: bigint | number
   }
 
   export type NestedIntFilter<$PrismaModel = never> = {
@@ -76483,33 +76441,6 @@ export namespace Prisma {
     _sum?: NestedDecimalFilter<$PrismaModel>
     _min?: NestedDecimalFilter<$PrismaModel>
     _max?: NestedDecimalFilter<$PrismaModel>
-  }
-
-  export type NestedBigIntFilter<$PrismaModel = never> = {
-    equals?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    in?: bigint[] | number[]
-    notIn?: bigint[] | number[]
-    lt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    lte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    gte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    not?: NestedBigIntFilter<$PrismaModel> | bigint | number
-  }
-
-  export type NestedBigIntWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    in?: bigint[] | number[]
-    notIn?: bigint[] | number[]
-    lt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    lte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    gte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    not?: NestedBigIntWithAggregatesFilter<$PrismaModel> | bigint | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedBigIntFilter<$PrismaModel>
-    _min?: NestedBigIntFilter<$PrismaModel>
-    _max?: NestedBigIntFilter<$PrismaModel>
   }
 
   export type unaCreateWithoutOutliersInput = {

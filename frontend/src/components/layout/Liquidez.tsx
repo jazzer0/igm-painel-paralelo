@@ -1,5 +1,12 @@
 import { ArcElement, Chart } from "chart.js";
-import { Button, Card, Elevation, Icon, Tooltip, Colors, Position } from "@blueprintjs/core";
+import {
+  Button,
+  Card,
+  Elevation,
+  Tooltip,
+  Colors,
+  Position,
+} from "@blueprintjs/core";
 import { Doughnut } from "react-chartjs-2";
 import { useEffect, useState } from "react";
 
@@ -29,7 +36,7 @@ export const Liquidez = ({
     datasets: [
       {
         data: [clampedValue, 100 - clampedValue],
-        backgroundColor: [Colors.GREEN3, Colors.LIGHT_GRAY3],
+        backgroundColor: [Colors.BLUE3, Colors.LIGHT_GRAY3],
         borderWidth: 0,
       },
     ],
@@ -48,20 +55,34 @@ export const Liquidez = ({
   };
 
   return (
-    <Card elevation={Elevation.ONE} interactive={true} className="flex flex-col justify-between h-96">
-      <div>
-        <div className="flex justify-between items-center mb-4">
+    <Card
+      elevation={Elevation.ONE}
+      interactive={true}
+      className="flex flex-col justify-between h-96"
+    >
+      <div className="relative mt-4">
+        <div className="flex items-center gap-2 mb-2">
           <h3 className="bp5-heading">Liquidez Geral</h3>
           <Tooltip
+            position={Position.LEFT}
+            usePortal={false}
+            hoverOpenDelay={100}
+            hoverCloseDelay={200}
             content={
               <div className="p-2">
-                <p className="mb-2">Razão: Caixa e Equivalentes/Restos a Pagar</p>
+                <p className="mb-2">
+                  Razão: Caixa e Equivalentes/Restos a Pagar
+                </p>
                 <p>Dados contábeis: FINBRA/Contas Anuais</p>
                 <p>Dados contábeis: SICONFI/2024</p>
               </div>
             }
           >
-            <Icon icon="info-sign" className="cursor-pointer" />
+            <Button
+              icon="info-sign"
+              variant="minimal"
+              className="hover:bp5-elevation-2"
+            />
           </Tooltip>
         </div>
 
@@ -75,18 +96,39 @@ export const Liquidez = ({
         </div>
       </div>
 
-      <div className="mt-8 mb-2 flex justify-end">
-        <Tooltip
-          content={
-            <div className="p-2">
-              <p>Caixa: {caixa_equivalentes?.toLocaleString("pt-BR", { style: "currency", currency: "BRL" }) || "N/A"}</p>
-              <p>Restos a Pagar: {restos_pagar?.toLocaleString("pt-BR", { style: "currency", currency: "BRL" }) || "N/A"}</p>
-            </div>
-          }
-          position={Position.RIGHT}
-        >
-          <Button text="Detalhes" minimal />
-        </Tooltip>
+      <div className="relative mt-4">
+        <div className="relative mt-4 flex justify-end">
+          <Tooltip
+            position={Position.LEFT_BOTTOM}
+            usePortal={false}
+            hoverOpenDelay={100}
+            hoverCloseDelay={200}
+            content={
+              <div className="p-2">
+                <p>
+                  Caixa:{" "}
+                  {caixa_equivalentes?.toLocaleString("pt-BR", {
+                    style: "currency",
+                    currency: "BRL",
+                  }) || "N/A"}
+                </p>
+                <p>
+                  Restos a Pagar:{" "}
+                  {restos_pagar?.toLocaleString("pt-BR", {
+                    style: "currency",
+                    currency: "BRL",
+                  }) || "N/A"}
+                </p>
+              </div>
+            }
+          >
+            <Button
+              text="Detalhes"
+              variant="minimal"
+              className="hover:bp5-elevation-2"
+            />
+          </Tooltip>
+        </div>
       </div>
     </Card>
   );

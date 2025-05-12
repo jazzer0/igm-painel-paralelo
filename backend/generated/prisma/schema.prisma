@@ -836,7 +836,7 @@ view transparencia_cauc {
   uf                            String?  @db.VarChar(50)
   nome_mesclado                 String?  @db.VarChar(103)
   transparencia_cauc_bruto      Decimal? @db.Decimal(40, 6)
-  pendencias                    BigInt
+  pendencias                    Int
   pendencias_legenda            String?  @db.Text
   pendencias_legenda_individual String?  @db.Text
 

@@ -1,5 +1,12 @@
 import { ArcElement, Chart } from "chart.js";
-import { Button, Card, Elevation, Icon, Tooltip, Colors, Position } from "@blueprintjs/core";
+import {
+  Button,
+  Card,
+  Elevation,
+  Tooltip,
+  Colors,
+  Position,
+} from "@blueprintjs/core";
 import { Doughnut } from "react-chartjs-2";
 import { useEffect, useState } from "react";
 
@@ -54,11 +61,19 @@ export const Comissionados = ({
   };
 
   return (
-    <Card elevation={Elevation.ONE} interactive={true} className="flex flex-col justify-between h-96">
-      <div>
-        <div className="flex justify-between items-center mb-4">
+    <Card
+      elevation={Elevation.ONE}
+      interactive={true}
+      className="flex flex-col justify-between h-96"
+    >
+      <div className="relative mt-4">
+        <div className="flex items-center gap-2 mb-2">
           <h3 className="bp5-heading">Servidores e Comissionados</h3>
           <Tooltip
+            position={Position.LEFT}
+            usePortal={false}
+            hoverOpenDelay={100}
+            hoverCloseDelay={200}
             content={
               <div className="p-2">
                 <p className="mb-2">Razão: Comissionados/Servidores</p>
@@ -67,7 +82,11 @@ export const Comissionados = ({
               </div>
             }
           >
-            <Icon icon="info-sign" className="cursor-pointer" />
+            <Button
+              icon="info-sign"
+              variant="minimal"
+              className="hover:bp5-elevation-2"
+            />
           </Tooltip>
         </div>
 
@@ -75,14 +94,18 @@ export const Comissionados = ({
           <Doughnut data={chartData} options={chartOptions} />
           <div className="absolute inset-0 flex items-center justify-center">
             <span className="bp5-heading text-2xl">
-              {clampedValue.toFixed(2).replace('.', ',')}%
+              {clampedValue.toFixed(2).replace(".", ",")}%
             </span>
           </div>
         </div>
       </div>
 
-      <div className="mt-8 mb-2 flex justify-end">
+      <div className="relative mt-4 flex justify-end">
         <Tooltip
+          position={Position.LEFT_BOTTOM}
+          usePortal={false}
+          hoverOpenDelay={100}
+          hoverCloseDelay={200}
           content={
             <div className="p-2">
               <p>População: {formatValue(populacao)}</p>
@@ -90,9 +113,12 @@ export const Comissionados = ({
               <p>Comissionados: {formatValue(comissionados)}</p>
             </div>
           }
-          position={Position.RIGHT}
         >
-          <Button text="Detalhes" minimal />
+          <Button
+            text="Detalhes"
+            variant="minimal"
+            className="hover:bp5-elevation-2"
+          />
         </Tooltip>
       </div>
     </Card>
