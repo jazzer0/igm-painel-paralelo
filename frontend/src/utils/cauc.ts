@@ -8,16 +8,22 @@ export type CaucCriteria = {
 export const organizeCaucCriteria = (
   legenda: LegendaCauc[]
 ): CaucCriteria[] => {
-  const mainCriteria = legenda.filter((l) =>
-    ["I", "II", "III", "IV", "V"].includes(l.codigo_item)
-  );
+  const romanToNumber: Record<string, string> = {
+    I: "1_",
+    II: "2_",
+    III: "3_",
+    IV: "4_",
+    V: "5_",
+  };
 
-  return mainCriteria.map((main) => ({
-    main,
-    subItems: legenda.filter((l) =>
-      l.codigo_item.startsWith(
-        main.codigo_item === "I" ? "1_" : `${main.codigo_item}_`
-      )
+  const mainCriteria = legenda
+    .filter((item) => ["I", "II", "III", "IV", "V"].includes(item.codigo_item))
+    .sort((a, b) => a.id - b.id);
+
+  return mainCriteria.map((mainItem) => ({
+    main: mainItem,
+    subItems: legenda.filter((subItem) =>
+      subItem.codigo_item.startsWith(romanToNumber[mainItem.codigo_item])
     ),
   }));
 };

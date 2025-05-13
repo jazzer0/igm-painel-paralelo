@@ -96,7 +96,6 @@ export const Liquidez = ({
         </div>
       </div>
 
-      <div className="relative mt-4">
         <div className="relative mt-4 flex justify-end">
           <Tooltip
             position={Position.LEFT_BOTTOM}
@@ -129,7 +128,6 @@ export const Liquidez = ({
             />
           </Tooltip>
         </div>
-      </div>
     </Card>
   );
 };

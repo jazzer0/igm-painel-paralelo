@@ -140,19 +140,23 @@ export const GastoPessoal = ({
         <div className="relative">
           <div className="flex flex-wrap justify-center gap-4 text-xs">
             {[
-              { label: "Abaixo do limite", color: colors.green },
-              { label: "Limite do alerta", color: colors.yellow },
-              { label: "Limite prudencial", color: colors.orange },
-              { label: "Acima do limite", color: colors.red },
+              { label: "Abaixo do limite de 49%", color: colors.green },
+              {
+                label: "Limite do alerta entre 49% e 51%",
+                color: colors.yellow,
+              },
+              {
+                label: "Limite prudencial entre 49% e 54%",
+                color: colors.orange,
+              },
+              { label: "Acima do limite de 54%", color: colors.red },
             ].map((item, index) => (
               <div key={index} className="flex items-center gap-1">
                 <div
                   className="w-3 h-3 rounded-sm"
                   style={{ backgroundColor: item.color }}
                 />
-                <span className="text-gray-600 dark:text-gray-300">
-                  {item.label}
-                </span>
+                <span>{item.label}</span>
               </div>
             ))}
           </div>
