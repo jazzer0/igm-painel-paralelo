@@ -35,7 +35,7 @@ export class PainelParaleloService {
   }
 
   async getMunicipioByCodIbge(codIbge: number) {
-    return this.prismaService.ibge_localidades.findFirst({
+    return this.prismaService.ibge_localidades.findUnique({
       where: { cod_ibge: codIbge },
     });
   }
@@ -75,7 +75,7 @@ export class PainelParaleloService {
   }
 
   async getColaboradoresbyCodIbge(codIbge: number) {
-    return this.prismaService.colaboradores_comissionados.findMany({
+    return this.prismaService.colaboradores_comissionados.findUnique({
       where: { cod_ibge: codIbge },
     });
   }

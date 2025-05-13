@@ -43100,14 +43100,14 @@ export namespace Prisma {
   export type Fiscal_gasto_pessoalAvgAggregateOutputType = {
     cod_ibge: number | null
     despesa_com_pessoal: Decimal | null
-    receita_corretes: Decimal | null
+    receita_corrente_liquida: Decimal | null
     fiscal_gasto_pessoal_bruto: Decimal | null
   }
 
   export type Fiscal_gasto_pessoalSumAggregateOutputType = {
     cod_ibge: number | null
     despesa_com_pessoal: Decimal | null
-    receita_corretes: Decimal | null
+    receita_corrente_liquida: Decimal | null
     fiscal_gasto_pessoal_bruto: Decimal | null
   }
 
@@ -43115,7 +43115,7 @@ export namespace Prisma {
     cod_ibge: number | null
     nome_ibge: string | null
     despesa_com_pessoal: Decimal | null
-    receita_corretes: Decimal | null
+    receita_corrente_liquida: Decimal | null
     fiscal_gasto_pessoal_bruto: Decimal | null
   }
 
@@ -43123,7 +43123,7 @@ export namespace Prisma {
     cod_ibge: number | null
     nome_ibge: string | null
     despesa_com_pessoal: Decimal | null
-    receita_corretes: Decimal | null
+    receita_corrente_liquida: Decimal | null
     fiscal_gasto_pessoal_bruto: Decimal | null
   }
 
@@ -43131,7 +43131,7 @@ export namespace Prisma {
     cod_ibge: number
     nome_ibge: number
     despesa_com_pessoal: number
-    receita_corretes: number
+    receita_corrente_liquida: number
     fiscal_gasto_pessoal_bruto: number
     _all: number
   }
@@ -43140,14 +43140,14 @@ export namespace Prisma {
   export type Fiscal_gasto_pessoalAvgAggregateInputType = {
     cod_ibge?: true
     despesa_com_pessoal?: true
-    receita_corretes?: true
+    receita_corrente_liquida?: true
     fiscal_gasto_pessoal_bruto?: true
   }
 
   export type Fiscal_gasto_pessoalSumAggregateInputType = {
     cod_ibge?: true
     despesa_com_pessoal?: true
-    receita_corretes?: true
+    receita_corrente_liquida?: true
     fiscal_gasto_pessoal_bruto?: true
   }
 
@@ -43155,7 +43155,7 @@ export namespace Prisma {
     cod_ibge?: true
     nome_ibge?: true
     despesa_com_pessoal?: true
-    receita_corretes?: true
+    receita_corrente_liquida?: true
     fiscal_gasto_pessoal_bruto?: true
   }
 
@@ -43163,7 +43163,7 @@ export namespace Prisma {
     cod_ibge?: true
     nome_ibge?: true
     despesa_com_pessoal?: true
-    receita_corretes?: true
+    receita_corrente_liquida?: true
     fiscal_gasto_pessoal_bruto?: true
   }
 
@@ -43171,7 +43171,7 @@ export namespace Prisma {
     cod_ibge?: true
     nome_ibge?: true
     despesa_com_pessoal?: true
-    receita_corretes?: true
+    receita_corrente_liquida?: true
     fiscal_gasto_pessoal_bruto?: true
     _all?: true
   }
@@ -43266,7 +43266,7 @@ export namespace Prisma {
     cod_ibge: number
     nome_ibge: string | null
     despesa_com_pessoal: Decimal | null
-    receita_corretes: Decimal | null
+    receita_corrente_liquida: Decimal | null
     fiscal_gasto_pessoal_bruto: Decimal | null
     _count: Fiscal_gasto_pessoalCountAggregateOutputType | null
     _avg: Fiscal_gasto_pessoalAvgAggregateOutputType | null
@@ -43293,7 +43293,7 @@ export namespace Prisma {
     cod_ibge?: boolean
     nome_ibge?: boolean
     despesa_com_pessoal?: boolean
-    receita_corretes?: boolean
+    receita_corrente_liquida?: boolean
     fiscal_gasto_pessoal_bruto?: boolean
   }, ExtArgs["result"]["fiscal_gasto_pessoal"]>
 
@@ -43303,11 +43303,11 @@ export namespace Prisma {
     cod_ibge?: boolean
     nome_ibge?: boolean
     despesa_com_pessoal?: boolean
-    receita_corretes?: boolean
+    receita_corrente_liquida?: boolean
     fiscal_gasto_pessoal_bruto?: boolean
   }
 
-  export type fiscal_gasto_pessoalOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"cod_ibge" | "nome_ibge" | "despesa_com_pessoal" | "receita_corretes" | "fiscal_gasto_pessoal_bruto", ExtArgs["result"]["fiscal_gasto_pessoal"]>
+  export type fiscal_gasto_pessoalOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"cod_ibge" | "nome_ibge" | "despesa_com_pessoal" | "receita_corrente_liquida" | "fiscal_gasto_pessoal_bruto", ExtArgs["result"]["fiscal_gasto_pessoal"]>
 
   export type $fiscal_gasto_pessoalPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "fiscal_gasto_pessoal"
@@ -43316,7 +43316,7 @@ export namespace Prisma {
       cod_ibge: number
       nome_ibge: string | null
       despesa_com_pessoal: Prisma.Decimal | null
-      receita_corretes: Prisma.Decimal | null
+      receita_corrente_liquida: Prisma.Decimal | null
       fiscal_gasto_pessoal_bruto: Prisma.Decimal | null
     }, ExtArgs["result"]["fiscal_gasto_pessoal"]>
     composites: {}
@@ -43690,7 +43690,7 @@ export namespace Prisma {
     readonly cod_ibge: FieldRef<"fiscal_gasto_pessoal", 'Int'>
     readonly nome_ibge: FieldRef<"fiscal_gasto_pessoal", 'String'>
     readonly despesa_com_pessoal: FieldRef<"fiscal_gasto_pessoal", 'Decimal'>
-    readonly receita_corretes: FieldRef<"fiscal_gasto_pessoal", 'Decimal'>
+    readonly receita_corrente_liquida: FieldRef<"fiscal_gasto_pessoal", 'Decimal'>
     readonly fiscal_gasto_pessoal_bruto: FieldRef<"fiscal_gasto_pessoal", 'Decimal'>
   }
     
@@ -57820,7 +57820,7 @@ export namespace Prisma {
   export type Transparencia_caucSumAggregateOutputType = {
     cod_ibge: number | null
     transparencia_cauc_bruto: Decimal | null
-    pendencias: bigint | null
+    pendencias: number | null
   }
 
   export type Transparencia_caucMinAggregateOutputType = {
@@ -57830,7 +57830,7 @@ export namespace Prisma {
     uf: string | null
     nome_mesclado: string | null
     transparencia_cauc_bruto: Decimal | null
-    pendencias: bigint | null
+    pendencias: number | null
     pendencias_legenda: string | null
     pendencias_legenda_individual: string | null
   }
@@ -57842,7 +57842,7 @@ export namespace Prisma {
     uf: string | null
     nome_mesclado: string | null
     transparencia_cauc_bruto: Decimal | null
-    pendencias: bigint | null
+    pendencias: number | null
     pendencias_legenda: string | null
     pendencias_legenda_individual: string | null
   }
@@ -58003,7 +58003,7 @@ export namespace Prisma {
     uf: string | null
     nome_mesclado: string | null
     transparencia_cauc_bruto: Decimal | null
-    pendencias: bigint
+    pendencias: number
     pendencias_legenda: string | null
     pendencias_legenda_individual: string | null
     _count: Transparencia_caucCountAggregateOutputType | null
@@ -58065,7 +58065,7 @@ export namespace Prisma {
       uf: string | null
       nome_mesclado: string | null
       transparencia_cauc_bruto: Prisma.Decimal | null
-      pendencias: bigint
+      pendencias: number
       pendencias_legenda: string | null
       pendencias_legenda_individual: string | null
     }, ExtArgs["result"]["transparencia_cauc"]>
@@ -58443,7 +58443,7 @@ export namespace Prisma {
     readonly uf: FieldRef<"transparencia_cauc", 'String'>
     readonly nome_mesclado: FieldRef<"transparencia_cauc", 'String'>
     readonly transparencia_cauc_bruto: FieldRef<"transparencia_cauc", 'Decimal'>
-    readonly pendencias: FieldRef<"transparencia_cauc", 'BigInt'>
+    readonly pendencias: FieldRef<"transparencia_cauc", 'Int'>
     readonly pendencias_legenda: FieldRef<"transparencia_cauc", 'String'>
     readonly pendencias_legenda_individual: FieldRef<"transparencia_cauc", 'String'>
   }
@@ -61322,7 +61322,7 @@ export namespace Prisma {
     cod_ibge: 'cod_ibge',
     nome_ibge: 'nome_ibge',
     despesa_com_pessoal: 'despesa_com_pessoal',
-    receita_corretes: 'receita_corretes',
+    receita_corrente_liquida: 'receita_corrente_liquida',
     fiscal_gasto_pessoal_bruto: 'fiscal_gasto_pessoal_bruto'
   };
 
@@ -62124,13 +62124,6 @@ export namespace Prisma {
    * Reference to a field of type 'Boolean'
    */
   export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
-    
-
-
-  /**
-   * Reference to a field of type 'BigInt'
-   */
-  export type BigIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BigInt'>
     
   /**
    * Deep Input Types
@@ -65741,7 +65734,7 @@ export namespace Prisma {
     cod_ibge?: IntFilter<"fiscal_gasto_pessoal"> | number
     nome_ibge?: StringNullableFilter<"fiscal_gasto_pessoal"> | string | null
     despesa_com_pessoal?: DecimalNullableFilter<"fiscal_gasto_pessoal"> | Decimal | DecimalJsLike | number | string | null
-    receita_corretes?: DecimalNullableFilter<"fiscal_gasto_pessoal"> | Decimal | DecimalJsLike | number | string | null
+    receita_corrente_liquida?: DecimalNullableFilter<"fiscal_gasto_pessoal"> | Decimal | DecimalJsLike | number | string | null
     fiscal_gasto_pessoal_bruto?: DecimalNullableFilter<"fiscal_gasto_pessoal"> | Decimal | DecimalJsLike | number | string | null
   }
 
@@ -65749,7 +65742,7 @@ export namespace Prisma {
     cod_ibge?: SortOrder
     nome_ibge?: SortOrderInput | SortOrder
     despesa_com_pessoal?: SortOrderInput | SortOrder
-    receita_corretes?: SortOrderInput | SortOrder
+    receita_corrente_liquida?: SortOrderInput | SortOrder
     fiscal_gasto_pessoal_bruto?: SortOrderInput | SortOrder
     _relevance?: fiscal_gasto_pessoalOrderByRelevanceInput
   }
@@ -65761,7 +65754,7 @@ export namespace Prisma {
     NOT?: fiscal_gasto_pessoalWhereInput | fiscal_gasto_pessoalWhereInput[]
     nome_ibge?: StringNullableFilter<"fiscal_gasto_pessoal"> | string | null
     despesa_com_pessoal?: DecimalNullableFilter<"fiscal_gasto_pessoal"> | Decimal | DecimalJsLike | number | string | null
-    receita_corretes?: DecimalNullableFilter<"fiscal_gasto_pessoal"> | Decimal | DecimalJsLike | number | string | null
+    receita_corrente_liquida?: DecimalNullableFilter<"fiscal_gasto_pessoal"> | Decimal | DecimalJsLike | number | string | null
     fiscal_gasto_pessoal_bruto?: DecimalNullableFilter<"fiscal_gasto_pessoal"> | Decimal | DecimalJsLike | number | string | null
   }, "cod_ibge">
 
@@ -65769,7 +65762,7 @@ export namespace Prisma {
     cod_ibge?: SortOrder
     nome_ibge?: SortOrderInput | SortOrder
     despesa_com_pessoal?: SortOrderInput | SortOrder
-    receita_corretes?: SortOrderInput | SortOrder
+    receita_corrente_liquida?: SortOrderInput | SortOrder
     fiscal_gasto_pessoal_bruto?: SortOrderInput | SortOrder
     _count?: fiscal_gasto_pessoalCountOrderByAggregateInput
     _avg?: fiscal_gasto_pessoalAvgOrderByAggregateInput
@@ -65785,7 +65778,7 @@ export namespace Prisma {
     cod_ibge?: IntWithAggregatesFilter<"fiscal_gasto_pessoal"> | number
     nome_ibge?: StringNullableWithAggregatesFilter<"fiscal_gasto_pessoal"> | string | null
     despesa_com_pessoal?: DecimalNullableWithAggregatesFilter<"fiscal_gasto_pessoal"> | Decimal | DecimalJsLike | number | string | null
-    receita_corretes?: DecimalNullableWithAggregatesFilter<"fiscal_gasto_pessoal"> | Decimal | DecimalJsLike | number | string | null
+    receita_corrente_liquida?: DecimalNullableWithAggregatesFilter<"fiscal_gasto_pessoal"> | Decimal | DecimalJsLike | number | string | null
     fiscal_gasto_pessoal_bruto?: DecimalNullableWithAggregatesFilter<"fiscal_gasto_pessoal"> | Decimal | DecimalJsLike | number | string | null
   }
 
@@ -66592,7 +66585,7 @@ export namespace Prisma {
     uf?: StringNullableFilter<"transparencia_cauc"> | string | null
     nome_mesclado?: StringNullableFilter<"transparencia_cauc"> | string | null
     transparencia_cauc_bruto?: DecimalNullableFilter<"transparencia_cauc"> | Decimal | DecimalJsLike | number | string | null
-    pendencias?: BigIntFilter<"transparencia_cauc"> | bigint | number
+    pendencias?: IntFilter<"transparencia_cauc"> | number
     pendencias_legenda?: StringNullableFilter<"transparencia_cauc"> | string | null
     pendencias_legenda_individual?: StringNullableFilter<"transparencia_cauc"> | string | null
   }
@@ -66620,7 +66613,7 @@ export namespace Prisma {
     uf?: StringNullableFilter<"transparencia_cauc"> | string | null
     nome_mesclado?: StringNullableFilter<"transparencia_cauc"> | string | null
     transparencia_cauc_bruto?: DecimalNullableFilter<"transparencia_cauc"> | Decimal | DecimalJsLike | number | string | null
-    pendencias?: BigIntFilter<"transparencia_cauc"> | bigint | number
+    pendencias?: IntFilter<"transparencia_cauc"> | number
     pendencias_legenda?: StringNullableFilter<"transparencia_cauc"> | string | null
     pendencias_legenda_individual?: StringNullableFilter<"transparencia_cauc"> | string | null
   }, "cod_ibge">
@@ -66652,7 +66645,7 @@ export namespace Prisma {
     uf?: StringNullableWithAggregatesFilter<"transparencia_cauc"> | string | null
     nome_mesclado?: StringNullableWithAggregatesFilter<"transparencia_cauc"> | string | null
     transparencia_cauc_bruto?: DecimalNullableWithAggregatesFilter<"transparencia_cauc"> | Decimal | DecimalJsLike | number | string | null
-    pendencias?: BigIntWithAggregatesFilter<"transparencia_cauc"> | bigint | number
+    pendencias?: IntWithAggregatesFilter<"transparencia_cauc"> | number
     pendencias_legenda?: StringNullableWithAggregatesFilter<"transparencia_cauc"> | string | null
     pendencias_legenda_individual?: StringNullableWithAggregatesFilter<"transparencia_cauc"> | string | null
   }
@@ -70999,7 +70992,7 @@ export namespace Prisma {
     cod_ibge: number
     nome_ibge?: string | null
     despesa_com_pessoal?: Decimal | DecimalJsLike | number | string | null
-    receita_corretes?: Decimal | DecimalJsLike | number | string | null
+    receita_corrente_liquida?: Decimal | DecimalJsLike | number | string | null
     fiscal_gasto_pessoal_bruto?: Decimal | DecimalJsLike | number | string | null
   }
 
@@ -71007,7 +71000,7 @@ export namespace Prisma {
     cod_ibge: number
     nome_ibge?: string | null
     despesa_com_pessoal?: Decimal | DecimalJsLike | number | string | null
-    receita_corretes?: Decimal | DecimalJsLike | number | string | null
+    receita_corrente_liquida?: Decimal | DecimalJsLike | number | string | null
     fiscal_gasto_pessoal_bruto?: Decimal | DecimalJsLike | number | string | null
   }
 
@@ -71015,7 +71008,7 @@ export namespace Prisma {
     cod_ibge?: IntFieldUpdateOperationsInput | number
     nome_ibge?: NullableStringFieldUpdateOperationsInput | string | null
     despesa_com_pessoal?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
-    receita_corretes?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    receita_corrente_liquida?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     fiscal_gasto_pessoal_bruto?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
   }
 
@@ -71023,7 +71016,7 @@ export namespace Prisma {
     cod_ibge?: IntFieldUpdateOperationsInput | number
     nome_ibge?: NullableStringFieldUpdateOperationsInput | string | null
     despesa_com_pessoal?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
-    receita_corretes?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    receita_corrente_liquida?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     fiscal_gasto_pessoal_bruto?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
   }
 
@@ -71031,7 +71024,7 @@ export namespace Prisma {
     cod_ibge: number
     nome_ibge?: string | null
     despesa_com_pessoal?: Decimal | DecimalJsLike | number | string | null
-    receita_corretes?: Decimal | DecimalJsLike | number | string | null
+    receita_corrente_liquida?: Decimal | DecimalJsLike | number | string | null
     fiscal_gasto_pessoal_bruto?: Decimal | DecimalJsLike | number | string | null
   }
 
@@ -71039,7 +71032,7 @@ export namespace Prisma {
     cod_ibge?: IntFieldUpdateOperationsInput | number
     nome_ibge?: NullableStringFieldUpdateOperationsInput | string | null
     despesa_com_pessoal?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
-    receita_corretes?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    receita_corrente_liquida?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     fiscal_gasto_pessoal_bruto?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
   }
 
@@ -71047,7 +71040,7 @@ export namespace Prisma {
     cod_ibge?: IntFieldUpdateOperationsInput | number
     nome_ibge?: NullableStringFieldUpdateOperationsInput | string | null
     despesa_com_pessoal?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
-    receita_corretes?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    receita_corrente_liquida?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     fiscal_gasto_pessoal_bruto?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
   }
 
@@ -71856,7 +71849,7 @@ export namespace Prisma {
     uf?: string | null
     nome_mesclado?: string | null
     transparencia_cauc_bruto?: Decimal | DecimalJsLike | number | string | null
-    pendencias: bigint | number
+    pendencias: number
     pendencias_legenda?: string | null
     pendencias_legenda_individual?: string | null
   }
@@ -71868,7 +71861,7 @@ export namespace Prisma {
     uf?: string | null
     nome_mesclado?: string | null
     transparencia_cauc_bruto?: Decimal | DecimalJsLike | number | string | null
-    pendencias: bigint | number
+    pendencias: number
     pendencias_legenda?: string | null
     pendencias_legenda_individual?: string | null
   }
@@ -71880,7 +71873,7 @@ export namespace Prisma {
     uf?: NullableStringFieldUpdateOperationsInput | string | null
     nome_mesclado?: NullableStringFieldUpdateOperationsInput | string | null
     transparencia_cauc_bruto?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
-    pendencias?: BigIntFieldUpdateOperationsInput | bigint | number
+    pendencias?: IntFieldUpdateOperationsInput | number
     pendencias_legenda?: NullableStringFieldUpdateOperationsInput | string | null
     pendencias_legenda_individual?: NullableStringFieldUpdateOperationsInput | string | null
   }
@@ -71892,7 +71885,7 @@ export namespace Prisma {
     uf?: NullableStringFieldUpdateOperationsInput | string | null
     nome_mesclado?: NullableStringFieldUpdateOperationsInput | string | null
     transparencia_cauc_bruto?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
-    pendencias?: BigIntFieldUpdateOperationsInput | bigint | number
+    pendencias?: IntFieldUpdateOperationsInput | number
     pendencias_legenda?: NullableStringFieldUpdateOperationsInput | string | null
     pendencias_legenda_individual?: NullableStringFieldUpdateOperationsInput | string | null
   }
@@ -71904,7 +71897,7 @@ export namespace Prisma {
     uf?: string | null
     nome_mesclado?: string | null
     transparencia_cauc_bruto?: Decimal | DecimalJsLike | number | string | null
-    pendencias: bigint | number
+    pendencias: number
     pendencias_legenda?: string | null
     pendencias_legenda_individual?: string | null
   }
@@ -71916,7 +71909,7 @@ export namespace Prisma {
     uf?: NullableStringFieldUpdateOperationsInput | string | null
     nome_mesclado?: NullableStringFieldUpdateOperationsInput | string | null
     transparencia_cauc_bruto?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
-    pendencias?: BigIntFieldUpdateOperationsInput | bigint | number
+    pendencias?: IntFieldUpdateOperationsInput | number
     pendencias_legenda?: NullableStringFieldUpdateOperationsInput | string | null
     pendencias_legenda_individual?: NullableStringFieldUpdateOperationsInput | string | null
   }
@@ -71928,7 +71921,7 @@ export namespace Prisma {
     uf?: NullableStringFieldUpdateOperationsInput | string | null
     nome_mesclado?: NullableStringFieldUpdateOperationsInput | string | null
     transparencia_cauc_bruto?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
-    pendencias?: BigIntFieldUpdateOperationsInput | bigint | number
+    pendencias?: IntFieldUpdateOperationsInput | number
     pendencias_legenda?: NullableStringFieldUpdateOperationsInput | string | null
     pendencias_legenda_individual?: NullableStringFieldUpdateOperationsInput | string | null
   }
@@ -75211,14 +75204,14 @@ export namespace Prisma {
     cod_ibge?: SortOrder
     nome_ibge?: SortOrder
     despesa_com_pessoal?: SortOrder
-    receita_corretes?: SortOrder
+    receita_corrente_liquida?: SortOrder
     fiscal_gasto_pessoal_bruto?: SortOrder
   }
 
   export type fiscal_gasto_pessoalAvgOrderByAggregateInput = {
     cod_ibge?: SortOrder
     despesa_com_pessoal?: SortOrder
-    receita_corretes?: SortOrder
+    receita_corrente_liquida?: SortOrder
     fiscal_gasto_pessoal_bruto?: SortOrder
   }
 
@@ -75226,7 +75219,7 @@ export namespace Prisma {
     cod_ibge?: SortOrder
     nome_ibge?: SortOrder
     despesa_com_pessoal?: SortOrder
-    receita_corretes?: SortOrder
+    receita_corrente_liquida?: SortOrder
     fiscal_gasto_pessoal_bruto?: SortOrder
   }
 
@@ -75234,14 +75227,14 @@ export namespace Prisma {
     cod_ibge?: SortOrder
     nome_ibge?: SortOrder
     despesa_com_pessoal?: SortOrder
-    receita_corretes?: SortOrder
+    receita_corrente_liquida?: SortOrder
     fiscal_gasto_pessoal_bruto?: SortOrder
   }
 
   export type fiscal_gasto_pessoalSumOrderByAggregateInput = {
     cod_ibge?: SortOrder
     despesa_com_pessoal?: SortOrder
-    receita_corretes?: SortOrder
+    receita_corrente_liquida?: SortOrder
     fiscal_gasto_pessoal_bruto?: SortOrder
   }
 
@@ -75868,17 +75861,6 @@ export namespace Prisma {
     seguranca_transito_bruto?: SortOrder
   }
 
-  export type BigIntFilter<$PrismaModel = never> = {
-    equals?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    in?: bigint[] | number[]
-    notIn?: bigint[] | number[]
-    lt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    lte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    gte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    not?: NestedBigIntFilter<$PrismaModel> | bigint | number
-  }
-
   export type transparencia_caucOrderByRelevanceInput = {
     fields: transparencia_caucOrderByRelevanceFieldEnum | transparencia_caucOrderByRelevanceFieldEnum[]
     sort: SortOrder
@@ -75931,22 +75913,6 @@ export namespace Prisma {
     cod_ibge?: SortOrder
     transparencia_cauc_bruto?: SortOrder
     pendencias?: SortOrder
-  }
-
-  export type BigIntWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    in?: bigint[] | number[]
-    notIn?: bigint[] | number[]
-    lt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    lte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    gte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    not?: NestedBigIntWithAggregatesFilter<$PrismaModel> | bigint | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedBigIntFilter<$PrismaModel>
-    _min?: NestedBigIntFilter<$PrismaModel>
-    _max?: NestedBigIntFilter<$PrismaModel>
   }
 
   export type transparencia_indiceOrderByRelevanceInput = {
@@ -76149,14 +76115,6 @@ export namespace Prisma {
     decrement?: Decimal | DecimalJsLike | number | string
     multiply?: Decimal | DecimalJsLike | number | string
     divide?: Decimal | DecimalJsLike | number | string
-  }
-
-  export type BigIntFieldUpdateOperationsInput = {
-    set?: bigint | number
-    increment?: bigint | number
-    decrement?: bigint | number
-    multiply?: bigint | number
-    divide?: bigint | number
   }
 
   export type NestedIntFilter<$PrismaModel = never> = {
@@ -76483,33 +76441,6 @@ export namespace Prisma {
     _sum?: NestedDecimalFilter<$PrismaModel>
     _min?: NestedDecimalFilter<$PrismaModel>
     _max?: NestedDecimalFilter<$PrismaModel>
-  }
-
-  export type NestedBigIntFilter<$PrismaModel = never> = {
-    equals?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    in?: bigint[] | number[]
-    notIn?: bigint[] | number[]
-    lt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    lte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    gte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    not?: NestedBigIntFilter<$PrismaModel> | bigint | number
-  }
-
-  export type NestedBigIntWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    in?: bigint[] | number[]
-    notIn?: bigint[] | number[]
-    lt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    lte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    gte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    not?: NestedBigIntWithAggregatesFilter<$PrismaModel> | bigint | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedBigIntFilter<$PrismaModel>
-    _min?: NestedBigIntFilter<$PrismaModel>
-    _max?: NestedBigIntFilter<$PrismaModel>
   }
 
   export type unaCreateWithoutOutliersInput = {

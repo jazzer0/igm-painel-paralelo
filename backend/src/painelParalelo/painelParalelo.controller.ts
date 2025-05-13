@@ -30,9 +30,10 @@ export class PainelParaleloController {
     return municipio;
   }
   @Get('municipios/:codIbge')
-  async getMunicipioByCodIbge(@Param('codIbge') codIbge: number) {
-    const municipio =
-      await this.painelParaleloService.getMunicipioByCodIbge(codIbge);
+  async getMunicipioByCodIbge(@Param('codIbge') codIbge: string) {
+    const municipio = await this.painelParaleloService.getMunicipioByCodIbge(
+      parseInt(codIbge),
+    );
     if (!municipio) {
       throw new NotFoundException(
         `Município com código IBGE ${codIbge} não encontrado`,
@@ -42,9 +43,10 @@ export class PainelParaleloController {
   }
 
   @Get('municipios/:codIbge/gasto-pessoal')
-  async getGastoPessoalByCodIbge(@Param('codIbge') codIbge: number) {
+  async getGastoPessoalByCodIbge(@Param('codIbge') codIbge: string) {
+    const cod_ibge = parseInt(codIbge, 10);
     const gasto =
-      await this.painelParaleloService.getGastoPessoalByCodIbge(codIbge);
+      await this.painelParaleloService.getGastoPessoalByCodIbge(cod_ibge);
     if (!gasto) {
       throw new NotFoundException(
         `Gasto pessoal para o código IBGE ${codIbge} não encontrado`,
@@ -54,9 +56,10 @@ export class PainelParaleloController {
   }
 
   @Get('municipios/:codIbge/liquidez')
-  async getLiquidezByCodIbge(@Param('codIbge') codIbge: number) {
-    const liquidez =
-      await this.painelParaleloService.getLiquidezByCodIbge(codIbge);
+  async getLiquidezByCodIbge(@Param('codIbge') codIbge: string) {
+    const liquidez = await this.painelParaleloService.getLiquidezByCodIbge(
+      parseInt(codIbge),
+    );
     if (!liquidez) {
       throw new NotFoundException(
         `Liquidez para o código IBGE ${codIbge} não encontrada`,
@@ -66,8 +69,10 @@ export class PainelParaleloController {
   }
 
   @Get('municipios/:codIbge/cauc')
-  async getCaucDataByCodIbge(@Param('codIbge') codIbge: number) {
-    const cauc = await this.painelParaleloService.getCaucDataByCodIbge(codIbge);
+  async getCaucDataByCodIbge(@Param('codIbge') codIbge: string) {
+    const cauc = await this.painelParaleloService.getCaucDataByCodIbge(
+      parseInt(codIbge),
+    );
     if (!cauc) {
       throw new NotFoundException(
         `Dados CAUC para o código IBGE ${codIbge} não encontrados`,
@@ -85,7 +90,7 @@ export class PainelParaleloController {
     return legendas;
   }
 
-  @Get('fontes-dados')
+  @Get('data-sources')
   async getDataSources() {
     const fontes = await this.painelParaleloService.getDataSources();
     if (!fontes || fontes.length === 0) {
@@ -95,10 +100,12 @@ export class PainelParaleloController {
   }
 
   @Get('municipios/:codIbge/colaboradores')
-  async getColaboradoresbyCodIbge(@Param('codIbge') codIbge: number) {
+  async getColaboradoresbyCodIbge(@Param('codIbge') codIbge: string) {
     const colaboradores =
-      await this.painelParaleloService.getColaboradoresbyCodIbge(codIbge);
-    if (!colaboradores || colaboradores.length === 0) {
+      await this.painelParaleloService.getColaboradoresbyCodIbge(
+        parseInt(codIbge),
+      );
+    if (!colaboradores) {
       throw new NotFoundException(
         `Colaboradores para o código IBGE ${codIbge} não encontrados`,
       );
