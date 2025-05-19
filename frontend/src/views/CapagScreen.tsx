@@ -231,7 +231,19 @@ export const CapagScreen = () => {
                     hoverOpenDelay={100}
                     hoverCloseDelay={200}
                     usePortal={false}
-                    content="Cadastro de Adimplência de Unidades Gestoras"
+                    content={
+                      <div className="p-2">
+                        <p className="mb-2">
+                        Cadastro de Adimplência de Unidades Gestoras: Siconfi/CAUC
+                        </p>
+                        <p className="mt-2">
+                          Os dados são geridos diariamente e atualizados de acordo com o último lançamento.
+                        </p>
+                        <p className="mt-2">
+                          As exigências do CAUC são separados de acordo com sua categoria de 1-5 e pendências podem ser visualizadas acima do card correspondente.
+                        </p>
+                      </div>
+                    }
                   >
                     <Button
                       icon="info-sign"
